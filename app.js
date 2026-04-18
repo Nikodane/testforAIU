@@ -17,7 +17,6 @@ const questionList = document.getElementById("questionList");
 const timerLabel = document.getElementById("timerLabel");
 const questionCounter = document.getElementById("questionCounter");
 const correctCounter = document.getElementById("correctCounter");
-const answerStrip = document.getElementById("answerStrip");
 const testTitle = document.getElementById("testTitle");
 const reportCorrect = document.getElementById("reportCorrect");
 const reportWrong = document.getElementById("reportWrong");
@@ -31,7 +30,6 @@ const restartFromTestBtn = document.getElementById("restartFromTestBtn");
 let activeTest = null;
 let activeQuestions = [];
 let answers = [];
-let answerHistory = [];
 let answeredCount = 0;
 let correctCount = 0;
 let currentQuestionIndex = 0;
@@ -107,30 +105,17 @@ function updateHeaderState() {
   correctCounter.textContent = `${correctCount}`;
 }
 
-function buildAnswerStrip() {
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < activeQuestions.length; i += 1) {
-    const stripCell = document.createElement("span");
-    stripCell.className = "strip-cell";
-    fragment.appendChild(stripCell);
-  }
-  answerStrip.replaceChildren(fragment);
-}
-
-function updateStripCell(position, isCorrect) {
-  const cell = answerStrip.children[position];
-  if (!cell) {
+function releaseInteractionState(target) {
+  const source = target instanceof Element ? target : null;
+  const button = source ? source.closest("button") : null;
+  if (!button) {
     return;
   }
-  cell.classList.add(isCorrect ? "correct" : "wrong");
-  cell.classList.add("pop");
-  cell.addEventListener(
-    "animationend",
-    () => {
-      cell.classList.remove("pop");
-    },
-    { once: true },
-  );
+  requestAnimationFrame(() => {
+    if (document.activeElement === button) {
+      button.blur();
+    }
+  });
 }
 
 function clampIndex(index) {
@@ -402,6 +387,7 @@ function handleQuestionListClick(event) {
     const questionIndex = Number(optionBtn.dataset.questionIndex);
     const optionIndex = Number(optionBtn.dataset.optionIndex);
     selectAnswer(questionIndex, optionIndex);
+    releaseInteractionState(optionBtn);
     return;
   }
 
@@ -420,6 +406,7 @@ function handleQuestionListClick(event) {
   } else if (navBtn.dataset.nav === "next") {
     goToQuestion(currentQuestionIndex + 1);
   }
+  releaseInteractionState(navBtn);
 }
 
 function selectAnswer(questionIndex, optionIndex) {
@@ -439,8 +426,6 @@ function selectAnswer(questionIndex, optionIndex) {
   if (isCorrect) {
     correctCount += 1;
   }
-  answerHistory.push(isCorrect);
-  updateStripCell(answerHistory.length - 1, isCorrect);
   updateHeaderState();
   renderCurrentQuestion(0, false);
 
@@ -542,7 +527,6 @@ function startTest(testId) {
   }
 
   answers = new Array(activeQuestions.length).fill(null);
-  answerHistory = [];
   answeredCount = 0;
   correctCount = 0;
   currentQuestionIndex = 0;
@@ -550,7 +534,6 @@ function startTest(testId) {
   testTitle.textContent = activeTest.title;
 
   showScreen(testScreen);
-  buildAnswerStrip();
   renderCurrentQuestion(0, false);
   updateHeaderState();
   startTimer();
