@@ -32,8 +32,19 @@ let activeTest = null;
 let activeQuestions = [];
 let answers = [];
 let answerHistory = [];
+let answeredCount = 0;
+let correctCount = 0;
+let currentQuestionIndex = 0;
 let elapsedSec = 0;
 let timerId = null;
+let autoAdvanceId = null;
+let finalizeDelayId = null;
+let isQuestionTransitioning = false;
+let transitionVersion = 0;
+
+const AUTO_ADVANCE_MS = 420;
+const FINALIZE_DELAY_MS = 340;
+const QUESTION_TRANSITION_MS = 220;
 
 function formatTime(totalSec) {
   const safe = Math.max(0, totalSec);
@@ -49,6 +60,29 @@ function showScreen(screen) {
   testScreen.classList.remove("active");
   resultScreen.classList.remove("active");
   screen.classList.add("active");
+}
+
+function clearDeferredActions() {
+  if (autoAdvanceId) {
+    clearTimeout(autoAdvanceId);
+    autoAdvanceId = null;
+  }
+  if (finalizeDelayId) {
+    clearTimeout(finalizeDelayId);
+    finalizeDelayId = null;
+  }
+  transitionVersion += 1;
+  isQuestionTransitioning = false;
+  const card = questionList.querySelector(".question-card");
+  if (card) {
+    card.classList.remove(
+      "is-transitioning",
+      "anim-out-next",
+      "anim-out-prev",
+      "anim-in-next",
+      "anim-in-prev",
+    );
+  }
 }
 
 function stopTimer() {
@@ -68,147 +102,421 @@ function startTimer() {
   }, 1000);
 }
 
-function countCorrect() {
-  return answers.reduce((acc, value, index) => {
-    if (value === null) {
-      return acc;
-    }
-    return acc + (value === activeQuestions[index].answer ? 1 : 0);
-  }, 0);
-}
-
-function countAnswered() {
-  return answers.filter((value) => value !== null).length;
-}
-
-function updateStrip() {
-  const cells = answerStrip.querySelectorAll(".strip-cell");
-  cells.forEach((cell, i) => {
-    cell.classList.remove("correct", "wrong");
-    if (i >= answerHistory.length) {
-      return;
-    }
-    if (answerHistory[i]) {
-      cell.classList.add("correct");
-      return;
-    }
-    cell.classList.add("wrong");
-  });
-}
-
 function updateHeaderState() {
-  const answered = countAnswered();
-  const total = activeQuestions.length;
-  const correct = countCorrect();
-
-  questionCounter.textContent = `${answered} / ${total}`;
-  correctCounter.textContent = `${correct}`;
-  updateStrip();
+  questionCounter.textContent = `${answeredCount} / ${activeQuestions.length}`;
+  correctCounter.textContent = `${correctCount}`;
 }
 
-function renderQuestions() {
-  questionList.innerHTML = "";
-  answerStrip.innerHTML = "";
-
-  activeQuestions.forEach((question, index) => {
-    const card = document.createElement("article");
-    card.className = "question-card";
-    card.id = `question-${index + 1}`;
-
-    const number = document.createElement("span");
-    number.className = "question-number";
-    number.textContent = `${index + 1}`;
-
-    const title = document.createElement("h3");
-    title.className = "question-title";
-    title.textContent = question.text;
-
-    const options = document.createElement("div");
-    options.className = "option-list";
-
-    question.options.forEach((option, optionIndex) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "option-btn";
-      btn.textContent = option;
-      btn.dataset.questionIndex = String(index);
-      btn.dataset.optionIndex = String(optionIndex);
-      btn.addEventListener("click", () => selectAnswer(index, optionIndex));
-      options.appendChild(btn);
-    });
-
-    card.append(number, title, options);
-    questionList.appendChild(card);
-
+function buildAnswerStrip() {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < activeQuestions.length; i += 1) {
     const stripCell = document.createElement("span");
     stripCell.className = "strip-cell";
-    answerStrip.appendChild(stripCell);
-  });
+    fragment.appendChild(stripCell);
+  }
+  answerStrip.replaceChildren(fragment);
 }
 
-function lockQuestion(index) {
-  const questionCard = document.getElementById(`question-${index + 1}`);
-  if (!questionCard) {
+function updateStripCell(position, isCorrect) {
+  const cell = answerStrip.children[position];
+  if (!cell) {
     return;
   }
-  questionCard.querySelectorAll(".option-btn").forEach((btn) => {
+  cell.classList.add(isCorrect ? "correct" : "wrong");
+  cell.classList.add("pop");
+  cell.addEventListener(
+    "animationend",
+    () => {
+      cell.classList.remove("pop");
+    },
+    { once: true },
+  );
+}
+
+function clampIndex(index) {
+  if (!activeQuestions.length) {
+    return 0;
+  }
+  if (index < 0) {
+    return 0;
+  }
+  if (index >= activeQuestions.length) {
+    return activeQuestions.length - 1;
+  }
+  return index;
+}
+
+function findNextUnanswered(fromIndex) {
+  for (let i = fromIndex + 1; i < activeQuestions.length; i += 1) {
+    if (answers[i] === null) {
+      return i;
+    }
+  }
+  for (let i = 0; i <= fromIndex; i += 1) {
+    if (answers[i] === null) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function ensureQuestionCard() {
+  let card = questionList.querySelector(".question-card");
+  if (card) {
+    return card;
+  }
+
+  card = document.createElement("article");
+  card.className = "question-card";
+
+  const number = document.createElement("span");
+  number.className = "question-number";
+
+  const title = document.createElement("h3");
+  title.className = "question-title";
+
+  const options = document.createElement("div");
+  options.className = "option-list";
+
+  const nav = document.createElement("div");
+  nav.className = "question-nav";
+
+  const prevBtn = document.createElement("button");
+  prevBtn.type = "button";
+  prevBtn.className = "ghost-btn nav-btn";
+  prevBtn.dataset.nav = "prev";
+  prevBtn.textContent = "Назад";
+  prevBtn.disabled = false;
+
+  const status = document.createElement("p");
+  status.className = "question-position";
+  status.textContent = "";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.type = "button";
+  nextBtn.className = "ghost-btn nav-btn";
+  nextBtn.dataset.nav = "next";
+  nextBtn.textContent = "Далее";
+
+  nav.append(prevBtn, status, nextBtn);
+  card.append(number, title, options, nav);
+  questionList.replaceChildren(card);
+
+  return card;
+}
+
+function syncOptionButtons(optionsHost, question, questionIndex, selectedOption) {
+  const isAnswered = selectedOption !== null;
+
+  while (optionsHost.children.length > question.options.length) {
+    optionsHost.lastElementChild.remove();
+  }
+
+  question.options.forEach((option, optionIndex) => {
+    let btn = optionsHost.children[optionIndex];
+    if (!btn) {
+      btn = document.createElement("button");
+      btn.type = "button";
+      optionsHost.appendChild(btn);
+    }
+
+    btn.className = "option-btn";
+    btn.textContent = option;
+    btn.dataset.questionIndex = String(questionIndex);
+    btn.dataset.optionIndex = String(optionIndex);
+
+    if (!isAnswered) {
+      return;
+    }
+
     btn.classList.add("locked");
-  });
-}
-
-function colorQuestion(index, selectedOption) {
-  const question = activeQuestions[index];
-  const questionCard = document.getElementById(`question-${index + 1}`);
-
-  if (!questionCard) {
-    return;
-  }
-
-  questionCard.querySelectorAll(".option-btn").forEach((btn) => {
-    const optionIndex = Number(btn.dataset.optionIndex);
-    btn.classList.remove("correct", "wrong");
-
     if (optionIndex === question.answer) {
       btn.classList.add("correct");
       return;
     }
-
-    if (optionIndex === selectedOption && selectedOption !== question.answer) {
+    if (optionIndex === selectedOption) {
       btn.classList.add("wrong");
     }
   });
 }
 
+function patchQuestionCard(card, index) {
+  const question = activeQuestions[index];
+  if (!question) {
+    questionList.innerHTML = "";
+    return;
+  }
+
+  card.querySelector(".question-number").textContent = `${index + 1}`;
+  card.querySelector(".question-title").textContent = question.text;
+  card.querySelector(".question-position").textContent = `Вопрос ${index + 1} из ${activeQuestions.length}`;
+  card.querySelector('[data-nav="prev"]').disabled = index === 0;
+  card.querySelector('[data-nav="next"]').disabled = index === activeQuestions.length - 1;
+
+  syncOptionButtons(card.querySelector(".option-list"), question, index, answers[index]);
+}
+
+function animateQuestionSwap(card, direction, onSwap) {
+  if (isQuestionTransitioning) {
+    return;
+  }
+
+  const version = transitionVersion;
+  isQuestionTransitioning = true;
+  card.classList.add("is-transitioning");
+
+  const outClass = direction >= 0 ? "anim-out-next" : "anim-out-prev";
+  const inClass = direction >= 0 ? "anim-in-next" : "anim-in-prev";
+  let outDone = false;
+  let inDone = false;
+
+  const finish = () => {
+    if (version !== transitionVersion) {
+      return;
+    }
+    if (!outDone || !inDone) {
+      return;
+    }
+    card.classList.remove("is-transitioning");
+    isQuestionTransitioning = false;
+  };
+
+  const startIn = () => {
+    if (version !== transitionVersion) {
+      return;
+    }
+    onSwap();
+    card.classList.remove(outClass);
+    card.classList.add(inClass);
+
+    requestAnimationFrame(() => {
+      card.classList.remove(inClass);
+    });
+
+    const onInEnd = (event) => {
+      if (version !== transitionVersion) {
+        return;
+      }
+      if (event.target !== card || event.propertyName !== "opacity") {
+        return;
+      }
+      card.removeEventListener("transitionend", onInEnd);
+      inDone = true;
+      finish();
+    };
+
+    card.addEventListener("transitionend", onInEnd);
+    setTimeout(() => {
+      if (version !== transitionVersion) {
+        return;
+      }
+      if (!inDone) {
+        inDone = true;
+        finish();
+      }
+    }, QUESTION_TRANSITION_MS + 60);
+  };
+
+  const onOutEnd = (event) => {
+    if (version !== transitionVersion) {
+      return;
+    }
+    if (event.target !== card || event.propertyName !== "opacity") {
+      return;
+    }
+    card.removeEventListener("transitionend", onOutEnd);
+    outDone = true;
+    startIn();
+  };
+
+  card.addEventListener("transitionend", onOutEnd);
+
+  requestAnimationFrame(() => {
+    if (version !== transitionVersion) {
+      return;
+    }
+    card.classList.add(outClass);
+  });
+
+  setTimeout(() => {
+    if (version !== transitionVersion) {
+      return;
+    }
+    if (!outDone) {
+      card.removeEventListener("transitionend", onOutEnd);
+      outDone = true;
+      startIn();
+    }
+  }, QUESTION_TRANSITION_MS + 60);
+}
+
+function renderCurrentQuestion(direction = 0, animate = false) {
+  const index = clampIndex(currentQuestionIndex);
+  currentQuestionIndex = index;
+  const card = ensureQuestionCard();
+
+  if (animate && direction !== 0) {
+    animateQuestionSwap(card, direction, () => patchQuestionCard(card, index));
+    return;
+  }
+
+  patchQuestionCard(card, index);
+}
+
+function queueAutoAdvance() {
+  if (autoAdvanceId || answeredCount === activeQuestions.length) {
+    return;
+  }
+
+  autoAdvanceId = setTimeout(() => {
+    autoAdvanceId = null;
+    const nextUnanswered = findNextUnanswered(currentQuestionIndex);
+    if (nextUnanswered === -1) {
+      return;
+    }
+    goToQuestion(nextUnanswered);
+  }, AUTO_ADVANCE_MS);
+}
+
+function goToQuestion(nextIndex) {
+  if (isQuestionTransitioning) {
+    return;
+  }
+
+  const normalized = clampIndex(nextIndex);
+  if (normalized === currentQuestionIndex) {
+    return;
+  }
+  const direction = normalized > currentQuestionIndex ? 1 : -1;
+  currentQuestionIndex = normalized;
+  renderCurrentQuestion(direction, true);
+}
+
+function handleQuestionListClick(event) {
+  if (isQuestionTransitioning) {
+    return;
+  }
+
+  const optionBtn = event.target.closest(".option-btn");
+  if (optionBtn && questionList.contains(optionBtn)) {
+    const questionIndex = Number(optionBtn.dataset.questionIndex);
+    const optionIndex = Number(optionBtn.dataset.optionIndex);
+    selectAnswer(questionIndex, optionIndex);
+    return;
+  }
+
+  const navBtn = event.target.closest("[data-nav]");
+  if (!navBtn || !questionList.contains(navBtn) || navBtn.disabled) {
+    return;
+  }
+
+  if (autoAdvanceId) {
+    clearTimeout(autoAdvanceId);
+    autoAdvanceId = null;
+  }
+
+  if (navBtn.dataset.nav === "prev") {
+    goToQuestion(currentQuestionIndex - 1);
+  } else if (navBtn.dataset.nav === "next") {
+    goToQuestion(currentQuestionIndex + 1);
+  }
+}
+
 function selectAnswer(questionIndex, optionIndex) {
+  if (questionIndex !== currentQuestionIndex) {
+    currentQuestionIndex = clampIndex(questionIndex);
+    renderCurrentQuestion(0, false);
+  }
+
   if (answers[questionIndex] !== null) {
     return;
   }
 
   answers[questionIndex] = optionIndex;
+  answeredCount += 1;
+
   const isCorrect = optionIndex === activeQuestions[questionIndex].answer;
-  answerHistory.push(isCorrect);
-
-  colorQuestion(questionIndex, optionIndex);
-  lockQuestion(questionIndex);
-  updateHeaderState();
-
-  if (countAnswered() === activeQuestions.length) {
-    finalizeTest();
+  if (isCorrect) {
+    correctCount += 1;
   }
+  answerHistory.push(isCorrect);
+  updateStripCell(answerHistory.length - 1, isCorrect);
+  updateHeaderState();
+  renderCurrentQuestion(0, false);
+
+  if (answeredCount === activeQuestions.length) {
+    if (finalizeDelayId) {
+      clearTimeout(finalizeDelayId);
+    }
+    finalizeDelayId = setTimeout(() => {
+      finalizeDelayId = null;
+      finalizeTest();
+    }, FINALIZE_DELAY_MS);
+    return;
+  }
+
+  queueAutoAdvance();
 }
 
 function finalizeTest() {
+  clearDeferredActions();
   stopTimer();
-  const correct = countCorrect();
   const total = activeQuestions.length;
-  const wrong = total - correct;
+  const wrong = total - correctCount;
 
-  reportCorrect.textContent = `${correct}`;
+  reportCorrect.textContent = `${correctCount}`;
   reportWrong.textContent = `${wrong}`;
   reportTime.textContent = `Время: ${formatTime(elapsedSec)}`;
 
   showScreen(resultScreen);
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function shuffleInPlace(items) {
+  for (let i = items.length - 1; i > 0; i -= 1) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [items[i], items[randomIndex]] = [items[randomIndex], items[i]];
+  }
+  return items;
+}
+
+function prepareQuestionForSession(question) {
+  if (!question || !Array.isArray(question.options) || question.options.length === 0) {
+    return null;
+  }
+
+  const optionPairs = question.options.map((option, originalIndex) => ({
+    option,
+    originalIndex,
+  }));
+  shuffleInPlace(optionPairs);
+
+  const remappedAnswerIndex = optionPairs.findIndex(
+    (entry) => entry.originalIndex === question.answer,
+  );
+
+  if (remappedAnswerIndex === -1) {
+    return null;
+  }
+
+  return {
+    text: question.text,
+    options: optionPairs.map((entry) => entry.option),
+    answer: remappedAnswerIndex,
+  };
+}
+
+function createRandomizedQuestionSet(sourceQuestions) {
+  const sessionQuestions = [];
+
+  sourceQuestions.forEach((question) => {
+    const prepared = prepareQuestionForSession(question);
+    if (prepared) {
+      sessionQuestions.push(prepared);
+    }
+  });
+
+  return shuffleInPlace(sessionQuestions);
 }
 
 function getQuestionsForTest(test) {
@@ -221,12 +529,13 @@ function getQuestionsForTest(test) {
 }
 
 function startTest(testId) {
+  clearDeferredActions();
   activeTest = tests.find((test) => test.id === testId);
   if (!activeTest) {
     return;
   }
 
-  activeQuestions = getQuestionsForTest(activeTest);
+  activeQuestions = createRandomizedQuestionSet(getQuestionsForTest(activeTest));
   if (activeQuestions.length === 0) {
     alert("Для этого теста нет вопросов. Проверь файл data/tests.");
     return;
@@ -234,11 +543,15 @@ function startTest(testId) {
 
   answers = new Array(activeQuestions.length).fill(null);
   answerHistory = [];
+  answeredCount = 0;
+  correctCount = 0;
+  currentQuestionIndex = 0;
   elapsedSec = 0;
   testTitle.textContent = activeTest.title;
 
   showScreen(testScreen);
-  renderQuestions();
+  buildAnswerStrip();
+  renderCurrentQuestion(0, false);
   updateHeaderState();
   startTimer();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -291,13 +604,18 @@ function renderHome() {
   });
 }
 
+questionList.addEventListener("click", handleQuestionListClick);
+
 backHomeBtn.addEventListener("click", () => {
+  clearDeferredActions();
   stopTimer();
   showScreen(homeScreen);
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 toHomeBtn.addEventListener("click", () => {
+  clearDeferredActions();
+  stopTimer();
   showScreen(homeScreen);
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
