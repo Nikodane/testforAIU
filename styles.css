@@ -161,7 +161,7 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .hero::after {
-  content: "// SYSTEM ONLINE поддержка автора 8-705-296-81-09";
+  content: "Каспи 8-705-296-81-09";
   position: absolute;
   top: 0.85rem; right: 1.1rem;
   font-family: var(--mono);
