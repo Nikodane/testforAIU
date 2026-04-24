@@ -1519,6 +1519,60 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Damages ordisrupts the normal function of a computer
 },
-    //тут должны быть вопросы, варианты и ответы
+   {
+  text: "Tags to skip four lines in HTML.",
+  options: [
+    "<BR><BR><BR>",
+    "<BR><BR>",
+    "<BRBR BR BR>",
+    "<BR><BR><BR><BR>",
+    "<BRBR BR>"
+  ],
+  answer: 3
+},
+{
+  text: "Tag for beginning of a new paragraph in HTML.",
+  options: [
+    "BODY",
+    "SU",
+    "SUP",
+    "SUT",
+    "P"
+  ],
+  answer: 4
+},
+{
+  text: "Web-site ...",
+  options: [
+    "collection of excel files, which are united by some principle",
+    "collection of pdf files, which are united by some principle",
+    "collection of word files, which are united by some principle",
+    "collection of web pages, which are united by some principle",
+    "collection of pictures, which are united by some principle"
+  ],
+  answer: 3
+},
+{
+  text: "Tag for the third level, size of words in HTML.",
+  options: [
+    "H8",
+    "H6",
+    "H3",
+    "H5",
+    "H1"
+  ],
+  answer: 2
+},
+{
+  text: "how many characters are used in the decimal system?",
+  options: [
+    "10",
+    "5",
+    "8",
+    "12",
+    "2"
+  ],
+  answer: 0
+} //тут должны быть вопросы, варианты и ответы
   ],
 };
