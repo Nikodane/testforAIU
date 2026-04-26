@@ -26,6 +26,9 @@ const backHomeBtn = document.getElementById("backHomeBtn");
 const toHomeBtn = document.getElementById("toHomeBtn");
 const restartBtn = document.getElementById("restartBtn");
 const restartFromTestBtn = document.getElementById("restartFromTestBtn");
+const finishNowBtn = document.getElementById("finishNowBtn");
+const modeStepBtn = document.getElementById("modeStepBtn");
+const modeListBtn = document.getElementById("modeListBtn");
 
 let activeTest = null;
 let activeQuestions = [];
@@ -40,15 +43,25 @@ let finalizeDelayId = null;
 let isQuestionTransitioning = false;
 let transitionVersion = 0;
 
+// Режим: "step" (по одному, как было) или "list" (длинный список с виртуализацией)
+let viewMode = "step";
+
 const AUTO_ADVANCE_MS = 420;
 const FINALIZE_DELAY_MS = 340;
 const QUESTION_TRANSITION_MS = 220;
 
+// ===== Виртуализация для режима "list" =====
+const ESTIMATED_ROW_HEIGHT = 320; // оценка высоты карточки до измерения
+const RENDER_BUFFER = 4;          // сколько карточек подгружать вне экрана сверху/снизу
+let listSlots = [];               // массив <li> плейсхолдеров с измеренной высотой
+let listObserver = null;          // IntersectionObserver
+let mountedCards = new Map();     // index -> .question-card (реально вмонтированные)
+let resizeObserver = null;        // следит за изменением высоты карточек
+let listScrollRaf = 0;
+
 function formatTime(totalSec) {
   const safe = Math.max(0, totalSec);
-  const minutes = Math.floor(safe / 60)
-    .toString()
-    .padStart(2, "0");
+  const minutes = Math.floor(safe / 60).toString().padStart(2, "0");
   const seconds = (safe % 60).toString().padStart(2, "0");
   return `${minutes}:${seconds}`;
 }
@@ -61,39 +74,24 @@ function showScreen(screen) {
 }
 
 function clearDeferredActions() {
-  if (autoAdvanceId) {
-    clearTimeout(autoAdvanceId);
-    autoAdvanceId = null;
-  }
-  if (finalizeDelayId) {
-    clearTimeout(finalizeDelayId);
-    finalizeDelayId = null;
-  }
+  if (autoAdvanceId) { clearTimeout(autoAdvanceId); autoAdvanceId = null; }
+  if (finalizeDelayId) { clearTimeout(finalizeDelayId); finalizeDelayId = null; }
   transitionVersion += 1;
   isQuestionTransitioning = false;
   const card = questionList.querySelector(".question-card");
   if (card) {
     card.classList.remove(
-      "is-transitioning",
-      "anim-out-next",
-      "anim-out-prev",
-      "anim-in-next",
-      "anim-in-prev",
+      "is-transitioning", "anim-out-next", "anim-out-prev",
+      "anim-in-next", "anim-in-prev",
     );
   }
 }
 
-function stopTimer() {
-  if (timerId) {
-    clearInterval(timerId);
-    timerId = null;
-  }
-}
+function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
 
 function startTimer() {
   stopTimer();
   timerLabel.textContent = formatTime(elapsedSec);
-
   timerId = setInterval(() => {
     elapsedSec += 1;
     timerLabel.textContent = formatTime(elapsedSec);
@@ -108,48 +106,33 @@ function updateHeaderState() {
 function releaseInteractionState(target) {
   const source = target instanceof Element ? target : null;
   const button = source ? source.closest("button") : null;
-  if (!button) {
-    return;
-  }
+  if (!button) return;
   requestAnimationFrame(() => {
-    if (document.activeElement === button) {
-      button.blur();
-    }
+    if (document.activeElement === button) button.blur();
   });
 }
 
 function clampIndex(index) {
-  if (!activeQuestions.length) {
-    return 0;
-  }
-  if (index < 0) {
-    return 0;
-  }
-  if (index >= activeQuestions.length) {
-    return activeQuestions.length - 1;
-  }
+  if (!activeQuestions.length) return 0;
+  if (index < 0) return 0;
+  if (index >= activeQuestions.length) return activeQuestions.length - 1;
   return index;
 }
 
 function findNextUnanswered(fromIndex) {
   for (let i = fromIndex + 1; i < activeQuestions.length; i += 1) {
-    if (answers[i] === null) {
-      return i;
-    }
+    if (answers[i] === null) return i;
   }
   for (let i = 0; i <= fromIndex; i += 1) {
-    if (answers[i] === null) {
-      return i;
-    }
+    if (answers[i] === null) return i;
   }
   return -1;
 }
 
+// ===================== STEP MODE =====================
 function ensureQuestionCard() {
   let card = questionList.querySelector(".question-card");
-  if (card) {
-    return card;
-  }
+  if (card) return card;
 
   card = document.createElement("article");
   card.className = "question-card";
@@ -171,11 +154,9 @@ function ensureQuestionCard() {
   prevBtn.className = "ghost-btn nav-btn";
   prevBtn.dataset.nav = "prev";
   prevBtn.textContent = "Назад";
-  prevBtn.disabled = false;
 
   const status = document.createElement("p");
   status.className = "question-position";
-  status.textContent = "";
 
   const nextBtn = document.createElement("button");
   nextBtn.type = "button";
@@ -204,33 +185,22 @@ function syncOptionButtons(optionsHost, question, questionIndex, selectedOption)
       btn.type = "button";
       optionsHost.appendChild(btn);
     }
-
     btn.className = "option-btn";
     btn.textContent = option;
     btn.dataset.questionIndex = String(questionIndex);
     btn.dataset.optionIndex = String(optionIndex);
 
-    if (!isAnswered) {
-      return;
-    }
+    if (!isAnswered) return;
 
     btn.classList.add("locked");
-    if (optionIndex === question.answer) {
-      btn.classList.add("correct");
-      return;
-    }
-    if (optionIndex === selectedOption) {
-      btn.classList.add("wrong");
-    }
+    if (optionIndex === question.answer) { btn.classList.add("correct"); return; }
+    if (optionIndex === selectedOption) btn.classList.add("wrong");
   });
 }
 
 function patchQuestionCard(card, index) {
   const question = activeQuestions[index];
-  if (!question) {
-    questionList.innerHTML = "";
-    return;
-  }
+  if (!question) { questionList.innerHTML = ""; return; }
 
   card.querySelector(".question-number").textContent = `${index + 1}`;
   card.querySelector(".question-title").textContent = question.text;
@@ -242,9 +212,7 @@ function patchQuestionCard(card, index) {
 }
 
 function animateQuestionSwap(card, direction, onSwap) {
-  if (isQuestionTransitioning) {
-    return;
-  }
+  if (isQuestionTransitioning) return;
 
   const version = transitionVersion;
   isQuestionTransitioning = true;
@@ -256,81 +224,50 @@ function animateQuestionSwap(card, direction, onSwap) {
   let inDone = false;
 
   const finish = () => {
-    if (version !== transitionVersion) {
-      return;
-    }
-    if (!outDone || !inDone) {
-      return;
-    }
+    if (version !== transitionVersion) return;
+    if (!outDone || !inDone) return;
     card.classList.remove("is-transitioning");
     isQuestionTransitioning = false;
   };
 
   const startIn = () => {
-    if (version !== transitionVersion) {
-      return;
-    }
+    if (version !== transitionVersion) return;
     onSwap();
     card.classList.remove(outClass);
     card.classList.add(inClass);
-
-    requestAnimationFrame(() => {
-      card.classList.remove(inClass);
-    });
+    requestAnimationFrame(() => card.classList.remove(inClass));
 
     const onInEnd = (event) => {
-      if (version !== transitionVersion) {
-        return;
-      }
-      if (event.target !== card || event.propertyName !== "opacity") {
-        return;
-      }
+      if (version !== transitionVersion) return;
+      if (event.target !== card || event.propertyName !== "opacity") return;
       card.removeEventListener("transitionend", onInEnd);
-      inDone = true;
-      finish();
+      inDone = true; finish();
     };
-
     card.addEventListener("transitionend", onInEnd);
     setTimeout(() => {
-      if (version !== transitionVersion) {
-        return;
-      }
-      if (!inDone) {
-        inDone = true;
-        finish();
-      }
+      if (version !== transitionVersion) return;
+      if (!inDone) { inDone = true; finish(); }
     }, QUESTION_TRANSITION_MS + 60);
   };
 
   const onOutEnd = (event) => {
-    if (version !== transitionVersion) {
-      return;
-    }
-    if (event.target !== card || event.propertyName !== "opacity") {
-      return;
-    }
+    if (version !== transitionVersion) return;
+    if (event.target !== card || event.propertyName !== "opacity") return;
     card.removeEventListener("transitionend", onOutEnd);
-    outDone = true;
-    startIn();
+    outDone = true; startIn();
   };
-
   card.addEventListener("transitionend", onOutEnd);
 
   requestAnimationFrame(() => {
-    if (version !== transitionVersion) {
-      return;
-    }
+    if (version !== transitionVersion) return;
     card.classList.add(outClass);
   });
 
   setTimeout(() => {
-    if (version !== transitionVersion) {
-      return;
-    }
+    if (version !== transitionVersion) return;
     if (!outDone) {
       card.removeEventListener("transitionend", onOutEnd);
-      outDone = true;
-      startIn();
+      outDone = true; startIn();
     }
   }, QUESTION_TRANSITION_MS + 60);
 }
@@ -344,46 +281,133 @@ function renderCurrentQuestion(direction = 0, animate = false) {
     animateQuestionSwap(card, direction, () => patchQuestionCard(card, index));
     return;
   }
-
   patchQuestionCard(card, index);
 }
 
 function queueAutoAdvance() {
-  if (autoAdvanceId || answeredCount === activeQuestions.length) {
-    return;
-  }
+  if (viewMode !== "step") return;
+  if (autoAdvanceId || answeredCount === activeQuestions.length) return;
 
   autoAdvanceId = setTimeout(() => {
     autoAdvanceId = null;
     const nextUnanswered = findNextUnanswered(currentQuestionIndex);
-    if (nextUnanswered === -1) {
-      return;
-    }
+    if (nextUnanswered === -1) return;
     goToQuestion(nextUnanswered);
   }, AUTO_ADVANCE_MS);
 }
 
 function goToQuestion(nextIndex) {
-  if (isQuestionTransitioning) {
-    return;
-  }
-
+  if (isQuestionTransitioning) return;
   const normalized = clampIndex(nextIndex);
-  if (normalized === currentQuestionIndex) {
-    return;
-  }
+  if (normalized === currentQuestionIndex) return;
   const direction = normalized > currentQuestionIndex ? 1 : -1;
   currentQuestionIndex = normalized;
   renderCurrentQuestion(direction, true);
 }
 
-function handleQuestionListClick(event) {
-  if (isQuestionTransitioning) {
-    return;
+// ===================== LIST MODE (виртуализация) =====================
+function buildListSkeleton() {
+  // Уничтожаем предыдущие наблюдатели
+  if (listObserver) { listObserver.disconnect(); listObserver = null; }
+  if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null; }
+  mountedCards = new Map();
+  listSlots = [];
+
+  questionList.innerHTML = "";
+  const frag = document.createDocumentFragment();
+
+  for (let i = 0; i < activeQuestions.length; i += 1) {
+    const slot = document.createElement("div");
+    slot.className = "question-slot";
+    slot.dataset.index = String(i);
+    slot.style.minHeight = ESTIMATED_ROW_HEIGHT + "px";
+    listSlots.push(slot);
+    frag.appendChild(slot);
+  }
+  questionList.appendChild(frag);
+
+  // ResizeObserver для удержания высоты слота равной фактической высоте карточки
+  if (typeof ResizeObserver !== "undefined") {
+    resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const card = entry.target;
+        const idx = Number(card.dataset.index);
+        const slot = listSlots[idx];
+        if (!slot) continue;
+        const h = Math.ceil(entry.contentRect.height);
+        if (h > 0) slot.style.minHeight = h + "px";
+      }
+    });
   }
 
+  // IntersectionObserver — рендерим карточку, когда слот близко к viewport
+  const rootMargin = `${ESTIMATED_ROW_HEIGHT * RENDER_BUFFER}px 0px`;
+  listObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      const idx = Number(entry.target.dataset.index);
+      if (entry.isIntersecting) {
+        mountListCard(idx);
+      } else {
+        // Размонтируем только если уже отвечено и далеко от экрана — экономим RAM
+        // Для простоты и стабильности высот: оставляем смонтированными.
+      }
+    }
+  }, { root: null, rootMargin, threshold: 0 });
+
+  listSlots.forEach((slot) => listObserver.observe(slot));
+}
+
+function mountListCard(index) {
+  if (mountedCards.has(index)) return;
+  const slot = listSlots[index];
+  if (!slot) return;
+
+  const card = document.createElement("article");
+  card.className = "question-card";
+  card.dataset.index = String(index);
+
+  const number = document.createElement("span");
+  number.className = "question-number";
+
+  const title = document.createElement("h3");
+  title.className = "question-title";
+
+  const options = document.createElement("div");
+  options.className = "option-list";
+
+  const status = document.createElement("p");
+  status.className = "question-position list-position";
+
+  card.append(number, title, options, status);
+  patchListCard(card, index);
+
+  slot.style.minHeight = ""; // освобождаем — пусть карточка задаёт высоту
+  slot.appendChild(card);
+  mountedCards.set(index, card);
+
+  if (resizeObserver) resizeObserver.observe(card);
+}
+
+function patchListCard(card, index) {
+  const question = activeQuestions[index];
+  if (!question) return;
+  card.querySelector(".question-number").textContent = `${index + 1}`;
+  card.querySelector(".question-title").textContent = question.text;
+  card.querySelector(".list-position").textContent = `Вопрос ${index + 1} из ${activeQuestions.length}`;
+  syncOptionButtons(card.querySelector(".option-list"), question, index, answers[index]);
+}
+
+function refreshMountedListCard(index) {
+  const card = mountedCards.get(index);
+  if (!card) return;
+  patchListCard(card, index);
+}
+
+// ===================== ОБЩАЯ ОБРАБОТКА =====================
+function handleQuestionListClick(event) {
   const optionBtn = event.target.closest(".option-btn");
   if (optionBtn && questionList.contains(optionBtn)) {
+    if (viewMode === "step" && isQuestionTransitioning) return;
     const questionIndex = Number(optionBtn.dataset.questionIndex);
     const optionIndex = Number(optionBtn.dataset.optionIndex);
     selectAnswer(questionIndex, optionIndex);
@@ -391,48 +415,42 @@ function handleQuestionListClick(event) {
     return;
   }
 
+  if (viewMode !== "step") return;
+
   const navBtn = event.target.closest("[data-nav]");
-  if (!navBtn || !questionList.contains(navBtn) || navBtn.disabled) {
-    return;
-  }
+  if (!navBtn || !questionList.contains(navBtn) || navBtn.disabled) return;
+  if (isQuestionTransitioning) return;
 
-  if (autoAdvanceId) {
-    clearTimeout(autoAdvanceId);
-    autoAdvanceId = null;
-  }
+  if (autoAdvanceId) { clearTimeout(autoAdvanceId); autoAdvanceId = null; }
 
-  if (navBtn.dataset.nav === "prev") {
-    goToQuestion(currentQuestionIndex - 1);
-  } else if (navBtn.dataset.nav === "next") {
-    goToQuestion(currentQuestionIndex + 1);
-  }
+  if (navBtn.dataset.nav === "prev") goToQuestion(currentQuestionIndex - 1);
+  else if (navBtn.dataset.nav === "next") goToQuestion(currentQuestionIndex + 1);
   releaseInteractionState(navBtn);
 }
 
 function selectAnswer(questionIndex, optionIndex) {
-  if (questionIndex !== currentQuestionIndex) {
+  if (viewMode === "step" && questionIndex !== currentQuestionIndex) {
     currentQuestionIndex = clampIndex(questionIndex);
     renderCurrentQuestion(0, false);
   }
 
-  if (answers[questionIndex] !== null) {
-    return;
-  }
+  if (answers[questionIndex] !== null) return;
 
   answers[questionIndex] = optionIndex;
   answeredCount += 1;
 
   const isCorrect = optionIndex === activeQuestions[questionIndex].answer;
-  if (isCorrect) {
-    correctCount += 1;
-  }
+  if (isCorrect) correctCount += 1;
   updateHeaderState();
-  renderCurrentQuestion(0, false);
+
+  if (viewMode === "step") {
+    renderCurrentQuestion(0, false);
+  } else {
+    refreshMountedListCard(questionIndex);
+  }
 
   if (answeredCount === activeQuestions.length) {
-    if (finalizeDelayId) {
-      clearTimeout(finalizeDelayId);
-    }
+    if (finalizeDelayId) clearTimeout(finalizeDelayId);
     finalizeDelayId = setTimeout(() => {
       finalizeDelayId = null;
       finalizeTest();
@@ -459,66 +477,74 @@ function finalizeTest() {
 
 function shuffleInPlace(items) {
   for (let i = items.length - 1; i > 0; i -= 1) {
-    const randomIndex = Math.floor(Math.random() * (i + 1));
-    [items[i], items[randomIndex]] = [items[randomIndex], items[i]];
+    const r = Math.floor(Math.random() * (i + 1));
+    [items[i], items[r]] = [items[r], items[i]];
   }
   return items;
 }
 
 function prepareQuestionForSession(question) {
-  if (!question || !Array.isArray(question.options) || question.options.length === 0) {
-    return null;
-  }
-
-  const optionPairs = question.options.map((option, originalIndex) => ({
-    option,
-    originalIndex,
-  }));
+  if (!question || !Array.isArray(question.options) || question.options.length === 0) return null;
+  const optionPairs = question.options.map((option, originalIndex) => ({ option, originalIndex }));
   shuffleInPlace(optionPairs);
-
-  const remappedAnswerIndex = optionPairs.findIndex(
-    (entry) => entry.originalIndex === question.answer,
-  );
-
-  if (remappedAnswerIndex === -1) {
-    return null;
-  }
-
+  const remappedAnswerIndex = optionPairs.findIndex((e) => e.originalIndex === question.answer);
+  if (remappedAnswerIndex === -1) return null;
   return {
     text: question.text,
-    options: optionPairs.map((entry) => entry.option),
+    options: optionPairs.map((e) => e.option),
     answer: remappedAnswerIndex,
   };
 }
 
 function createRandomizedQuestionSet(sourceQuestions) {
   const sessionQuestions = [];
-
-  sourceQuestions.forEach((question) => {
-    const prepared = prepareQuestionForSession(question);
-    if (prepared) {
-      sessionQuestions.push(prepared);
-    }
+  sourceQuestions.forEach((q) => {
+    const prepared = prepareQuestionForSession(q);
+    if (prepared) sessionQuestions.push(prepared);
   });
-
   return shuffleInPlace(sessionQuestions);
 }
 
 function getQuestionsForTest(test) {
   const bank = window.TEST_BANK || {};
   const payload = bank[test.dataKey];
-  if (!payload || !Array.isArray(payload.questions)) {
-    return [];
-  }
+  if (!payload || !Array.isArray(payload.questions)) return [];
   return payload.questions;
 }
 
-function startTest(testId) {
+function applyViewMode() {
+  modeStepBtn.classList.toggle("is-active", viewMode === "step");
+  modeListBtn.classList.toggle("is-active", viewMode === "list");
+  modeStepBtn.setAttribute("aria-selected", viewMode === "step" ? "true" : "false");
+  modeListBtn.setAttribute("aria-selected", viewMode === "list" ? "true" : "false");
+  questionList.classList.toggle("is-list-mode", viewMode === "list");
+  if (finishNowBtn) finishNowBtn.hidden = viewMode !== "list";
+}
+
+function renderActiveMode(preserveScroll = false) {
   clearDeferredActions();
-  activeTest = tests.find((test) => test.id === testId);
-  if (!activeTest) {
-    return;
+  // Полностью обнулим обзёрверы режима списка
+  if (listObserver) { listObserver.disconnect(); listObserver = null; }
+  if (resizeObserver) { resizeObserver.disconnect(); resizeObserver = null; }
+  mountedCards = new Map();
+  listSlots = [];
+
+  if (viewMode === "step") {
+    questionList.innerHTML = "";
+    renderCurrentQuestion(0, false);
+  } else {
+    buildListSkeleton();
   }
+  applyViewMode();
+  if (!preserveScroll) {
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+}
+
+function startTest(testId, mode) {
+  clearDeferredActions();
+  activeTest = tests.find((t) => t.id === testId);
+  if (!activeTest) return;
 
   activeQuestions = createRandomizedQuestionSet(getQuestionsForTest(activeTest));
   if (activeQuestions.length === 0) {
@@ -532,19 +558,18 @@ function startTest(testId) {
   currentQuestionIndex = 0;
   elapsedSec = 0;
   testTitle.textContent = activeTest.title;
+  if (mode === "list" || mode === "step") viewMode = mode;
 
   showScreen(testScreen);
-  renderCurrentQuestion(0, false);
+  renderActiveMode();
   updateHeaderState();
   startTimer();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function restartCurrentTest() {
-  if (!activeTest) {
-    return;
-  }
-  startTest(activeTest.id);
+  if (!activeTest) return;
+  startTest(activeTest.id, viewMode);
 }
 
 function renderHome() {
@@ -574,13 +599,19 @@ function renderHome() {
     launch.type = "button";
     launch.className = "primary-btn home-launch";
     launch.textContent = "Открыть тест";
-    launch.addEventListener("click", () => startTest(test.id));
+    launch.addEventListener("click", () => startTest(test.id, "step"));
+
+    const launchList = document.createElement("button");
+    launchList.type = "button";
+    launchList.className = "ghost-btn home-launch home-launch-list";
+    launchList.textContent = "Открыть списком";
+    launchList.addEventListener("click", () => startTest(test.id, "list"));
 
     const countChip = document.createElement("span");
     countChip.className = "chip question-chip";
     countChip.textContent = `Вопросов: ${getQuestionsForTest(test).length}`;
 
-    meta.append(launch, countChip);
+    meta.append(launch, launchList, countChip);
     body.append(heading, description, meta);
     card.append(cover, body);
     testGrid.appendChild(card);
@@ -606,4 +637,27 @@ toHomeBtn.addEventListener("click", () => {
 restartBtn.addEventListener("click", restartCurrentTest);
 restartFromTestBtn.addEventListener("click", restartCurrentTest);
 
+if (finishNowBtn) {
+  finishNowBtn.addEventListener("click", () => {
+    if (!activeQuestions.length) return;
+    finalizeTest();
+  });
+}
+
+modeStepBtn.addEventListener("click", () => {
+  if (viewMode === "step" || !activeQuestions.length) { applyViewMode(); return; }
+  viewMode = "step";
+  // в step показываем первый неотвеченный или текущий
+  const next = findNextUnanswered(-1);
+  if (next !== -1) currentQuestionIndex = next;
+  renderActiveMode();
+});
+
+modeListBtn.addEventListener("click", () => {
+  if (viewMode === "list" || !activeQuestions.length) { applyViewMode(); return; }
+  viewMode = "list";
+  renderActiveMode();
+});
+
 renderHome();
+applyViewMode();
