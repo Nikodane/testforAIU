@@ -661,3 +661,53 @@ modeListBtn.addEventListener("click", () => {
 
 renderHome();
 applyViewMode();
+
+/* ============= АВТО-СКРЫТИЕ STICKY-ПАНЕЛИ НА МОБИЛЬНОМ ============= */
+(function setupStickyAutoHide() {
+  const panel = document.querySelector(".sticky-panel");
+  if (!panel) return;
+
+  const mq = window.matchMedia("(max-width: 560px)");
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+  let accDown = 0;
+  let accUp = 0;
+  const HIDE_AFTER = 36; // px вниз — спрятать
+  const SHOW_AFTER = 18; // px вверх — показать
+
+  function onScroll() {
+    if (!mq.matches) {
+      if (panel.classList.contains("is-hidden")) panel.classList.remove("is-hidden");
+      return;
+    }
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY || 0;
+      const dy = y - lastY;
+      lastY = y;
+
+      // Возле верха — всегда показываем
+      if (y < 80) {
+        panel.classList.remove("is-hidden");
+        accDown = 0; accUp = 0;
+        ticking = false;
+        return;
+      }
+
+      if (dy > 0) {
+        accDown += dy; accUp = 0;
+        if (accDown > HIDE_AFTER) panel.classList.add("is-hidden");
+      } else if (dy < 0) {
+        accUp += -dy; accDown = 0;
+        if (accUp > SHOW_AFTER) panel.classList.remove("is-hidden");
+      }
+      ticking = false;
+    });
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  mq.addEventListener("change", () => {
+    if (!mq.matches) panel.classList.remove("is-hidden");
+  });
+})();
