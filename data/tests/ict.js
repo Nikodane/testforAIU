@@ -1573,6 +1573,50 @@ window.TEST_BANK.ict = {
     "2"
   ],
   answer: 0
-} //тут должны быть вопросы, варианты и ответы
+},
+  {
+  text: "A monitor displays information...",
+  options: [
+    "monitor",
+    "false",
+    "information",
+    "displays",
+    "true"
+  ],
+  answer: 4 // true
+},
+{
+  text: "how many characters are used in the decimal system?",
+  options: [
+    "5",
+    "2",
+    "8",
+    "10",
+    "12"
+  ],
+  answer: 3 // 10
+},
+{
+  text: "What will we get in cell A3, if the cells are A1=500; A2=450, then select these two cells and use autofill?",
+  options: [
+    "550",
+    "500",
+    "850",
+    "400",
+    "950"
+  ],
+  answer: 3 // 400
+},
+{
+  text: "When does IBM announce its Systems Network Architecture (SNA)?",
+  options: [
+    "1860",
+    "2018",
+    "2001",
+    "1974",
+    "1999"
+  ],
+  answer: 3 // 1974
+},  //тут должны быть вопросы, варианты и ответы
   ],
 };
