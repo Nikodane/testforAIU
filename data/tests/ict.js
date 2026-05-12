@@ -61,17 +61,6 @@ window.TEST_BANK.ict = {
     answer: 3, // Both
   },
   {
-    text: "What is the operating system?",
-    options: [
-      "computer games system",
-      "Information device",
-      "program creator",
-      "computer hardware device managementprogram",
-      "computer program",
-    ],
-    answer: 3, // computer hardware device managementprogram
-  },
-  {
     text: "E-Government portal of Kazakhstan",
     options: ["gov.kz", "egov.com", "egov.ru", "egov.kz", "egoverment.kz"],
     answer: 3, // egov.kz
@@ -151,13 +140,11 @@ window.TEST_BANK.ict = {
   options: ["Undo", "Cut", "Ctrl+z", "Paste", "Copy"],
   answer: 3, // Paste
 },
-
 {
   text: "Tag to insert picture in HTML.",
   options: ["SUP", "SU", "BODY", "IMGSRC", "SUT"],
   answer: 3, // IMGSRC
 },
-
 {
   text: "What is a system analyst responsible for?",
   options: [
@@ -169,7 +156,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // Analyzing andimproving IT systems
 },
-
 {
   text: "What happens in a document when the \"cut\" command is used?",
   options: [
@@ -181,25 +167,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // Selectedtext or graphics are removed
 },
-
-{
-  text: "what number comes up when you convert 100110 in binary to octal",
-  options: ["55", "31", "56", "45", "64"],
-  answer: 2, // 56
-},
-
 {
   text: "Tag for scrolling text in HTML.",
   options: ["BODY", "SUP", "SU", "SUT", "MARQUEE"],
   answer: 4, // MARQUEE
 },
-
 {
   text: "ARPANET stopped to exist in ...",
   options: ["1950", "2020", "1990", "1930", "2010"],
   answer: 2, // 1990
 },
-
 {
   text: "an example of numbered list in HTML.",
   options: ["AL", "SU", "IL", "UL", "OL"],
@@ -216,7 +193,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // A website thatindexes and retrieves other websites
 },
-
 {
   text: "Terabyte (TB)",
   options: [
@@ -228,25 +204,21 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // 1024Gigabytes
 },
-
 {
   text: "Which of the following is still useful for adding numbers?",
   options: ["IBMPC", "EDSAC", "ENIAC", "Abacus", "UNIVAC"],
   answer: 3, // Abacus
 },
-
 {
   text: "First e-mail program created in….",
   options: ["1987", "2020", "1945", "2011", "1971"],
   answer: 4, // 1971
 },
-
 {
   text: "What will we get in cell A3, if the cells are A1=300; A2=350, then select these two cells and use autofill?",
   options: ["400", "650", "750", "350", "250"],
   answer: 0, // 400
 },
-
 {
   text: "What are the tools used to ensure online security?",
   options: [
@@ -258,7 +230,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // antivirus programs, firewalls
 },
-
 {
   text: "… determines that the document background – image type and the text will be red (HTML)",
   options: [
@@ -270,19 +241,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // <BODYBACKGROUND = "image.jpg" TEXT = red>
 },
-
-{
-  text: "What Is virtual memory?",
-  options: [
-    "Information Storage Device",
-    "the physical memory of the computer",
-    "secondary memory usedby the operating system",
-    "video content on the screen",
-    "memory usedover the Internet",
-  ],
-  answer: 2, // secondary memory usedby the operating system
-},
-
 {
   text: "What is SEO (Search Engine Optimization)?",
   options: [
@@ -294,24 +252,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // A method ofimproving website visibility in search engines
 },
-
-{
-  text: "Integrated circuit (ICs) as basic electronic component (SSIC and MSIC)",
-  options: [
-    "SecondGeneration of Computers",
-    "ThirdGeneration of Computers",
-    "FirstGeneration of Computers",
-    "FourthGeneration of Computers",
-    "FifthGeneration",
-  ],
-  answer: 1, // ThirdGeneration of Computers
-},
 {
   text: "what is the value of the number 17 in the Octal system in the binary system?",
   options: ["10101", "111", "100001", "10011", "11001"],
   answer: 4, // 11001
 },
-
 {
   text: "which are the main computer devices?",
   options: [
@@ -323,7 +268,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // processor, RAM, hard drive
 },
-
 {
   text: "What is HTML?",
   options: [
@@ -335,19 +279,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // markup language used to create web pages
 },
-
 {
   text: "Which of the following are file extensions for audio files?",
   options: [".mp3", ".audio", ".mpeg", ".jpeg", ".txt"],
   answer: 0, // .mp3
 },
-
 {
   text: "convert 15 in decimal to binary:",
   options: ["1000", "1101", "1010", "1111", "1001"],
   answer: 3, // 1111
 },
-
 {
   text: "What is the full form of Wi-Fi?",
   options: [
@@ -359,7 +300,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // WirelessFidelity
 },
-
 {
   text: "What is the main function of RAM in a computer?",
   options: [
@@ -371,7 +311,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // To store datatemporarily for quick access
 },
-
 {
   text: "Computer understands _________________ language",
   options: [
@@ -383,7 +322,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // Binarylanguage
 },
-
 {
   text: "in what sense is the concept of \"algorithm\" used in Mathematics?",
   options: [
@@ -395,13 +333,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // sequence ofactions to solve the problem
 },
-
 {
   text: "Tag for bold words in HTML.",
   options: ["T", "B", "SU", "I", "U"],
   answer: 1, // B
 },
-
 {
   text: "Conversion of a hexadecimal number 3D to binary number is",
   options: [
@@ -413,43 +349,31 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // 111101
 },
-
 {
   text: "find the binary number corresponding to the Octal System: 7",
   options: ["111", "110", "101", "100", "1110"],
   answer: 0, // 111
 },
-
 {
   text: "Year of invention of the telegraph?",
   options: ["1876", "1947", "2001", "1860", "1837"],
   answer: 4, // 1837
 },
-
 {
   text: "We can remove / hide border of a shape by selecting …",
   options: ["NoLine", "NoBorder", "WhiteLine", "NoOutline", "GoogleDrive"],
   answer: 1, // NoBorder
 },
-
 {
   text: "Tag for underline words in HTML.",
   options: ["T", "I", "U", "B", "SU"],
   answer: 2, // U
 },
-
 {
   text: "… - technology of description of the appearance of a document executed by the markup language.",
   options: ["CSS", "html", "Doc", ".net", "Xls"],
   answer: 0, // CSS
 },
-
-{
-  text: "The decimal equivalent of the binary number 101011 is",
-  options: ["41", "39", "44", "43", "46"],
-  answer: 3, // 43
-},
-
 {
   text: "when is the listing structure used?",
   options: [
@@ -461,7 +385,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // in Data Processing in algorithms
 },
-
 {
   text: "The value in cell E10 = 75, if the student's mark (E10) is higher than 74, the results will be \"PASSED\" or \"FAILED\". Possible correct formula:",
   options: [
@@ -473,31 +396,26 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // =IF(E10>74,"PASSED","FAILED")
 },
-
 {
   text: "This diagram is used as a tool to visualize the workflow",
   options: ["Surfacechart", "Ganttchart", "Linechart", "Pdf flie", "Piechart"],
   answer: 1, // Ganttchart
 },
-
 {
   text: "Select the function to display records that meet certain criteria in Excel.",
   options: ["start", "nothing", "filter", "color", "sort"],
   answer: 2, // filter
 },
-
 {
   text: "In what mobile generation was appeared Wi-Fi technology?",
   options: ["2 G", "3 G", "4 G", "1 G", "5 G"],
   answer: 2, // 4 G
 },
-
 {
   text: "how many characters are used in the binary number system?",
   options: ["16", "8", "2", "4", "10"],
   answer: 2, // 2
 },
-
 {
   text: "What is Bluetooth used for?",
   options: [
@@ -509,7 +427,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // To connectdevices wirelessly over short distances
 },
-
 {
   text: "Which of these is a valid e-mail address?",
   options: [
@@ -521,7 +438,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // professor@learnthenet.com
 },
-
 {
   text: "What is e-commerce?",
   options: [
@@ -533,7 +449,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // The process ofbuying and selling goods over the internet
 },
-
 {
   text: "Which of the following is a common web development language?",
   options: [
@@ -545,7 +460,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // JavaScript
 },
-
 {
   text: "Function in excel filter, which shows text finishes with letter “z”?",
   options: [
@@ -557,43 +471,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // endswith z
 },
-
-{
-  text: "If cells: A1=90; A2=85; A3=80; A4=75; A5=75. What will be your formula if you are going to get the total? Choose INCORRECT answer!",
-  options: [
-    "=SUM(A2:A5)",
-    "=SIN(A1:A5)",
-    "=A1+A2+A3+A4+A5",
-    "=IF(E10>74,\"PASSED\",\"FAILED\")",
-    "=sum(a1:a5)",
-  ],
-  answer: 1, // =SIN(A1:A5)
-},
-
 {
   text: "Tag for the sixth level, size of words in HTML.",
   options: ["H1", "H4", "H8", "H6", "H2"],
   answer: 3, // H6
 },
-
 {
   text: "The smallest measurement of memory is",
   options: ["Megabytes", "Bytes", "Terabyte", "Kilobytes", "Gigabytes"],
   answer: 1, // Bytes
 },
-
-{
-  text: "What is the meaning of \"$\" in the program Excel",
-  options: [
-    "Itis impossible to change the meaning of cell",
-    "Inthe process of copying, not to change the cell address",
-    "returnscurrency meaning",
-    "Changingonly cell's format",
-    "Choosea ABS function",
-  ],
-  answer: 1, // Inthe process of copying, not to change the cell address
-},
-
 {
   text: "Which of the following would you use to find information on the internet?",
   options: [
@@ -605,7 +492,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // SearchEngine
 },
-
 {
   text: "Tag for the fourth level, size of words in HTML.",
   options: ["H6", "H4", "H8", "H5", "H1"],
@@ -616,19 +502,16 @@ window.TEST_BANK.ict = {
   options: ["H8", "H5", "H6", "H1", "H4"],
   answer: 1, // H5
 },
-
 {
   text: "The 0 and 1 in the binary numbering system are called binary digits or",
   options: ["Variations", "bytes", "decimalbytes", "kilobytes", "bits"],
   answer: 4, // bits
 },
-
 {
   text: "Format of the HTML document.",
   options: [".ppt", "texteditor", ".xlsx", ".html", ".docx"],
   answer: 3, // .html
 },
-
 {
   text: "Find the NAME whose 2 letter is “m” using the text filter in Excel.",
   options: [
@@ -640,13 +523,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // equals?m*
 },
-
 {
   text: "Which of the following is a type of software?",
   options: ["RAM", "CPU", "Windows 10", "Program", "Monitor"],
   answer: 2, // Windows 10
 },
-
 {
   text: "What are the ways to write an algorithm?",
   options: [
@@ -658,13 +539,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // all approaches are used
 },
-
 {
   text: "Choose tags to enter the window’s title in HTML?",
   options: ["HEAD,TITLE", "TABLE", "END", "ALIGN", "BEGIN"],
   answer: 0, // HEAD,TITLE
 },
-
 {
   text: "What branch of science does Computer Science study?",
   options: [
@@ -676,19 +555,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Computers and information processing
 },
-
 {
   text: "What kind of address C1 is",
   options: ["relative", "mixed", "address", "books", "absolute"],
   answer: 0, // relative
 },
-
 {
   text: "What characters are used in the octal number system?",
   options: ["0-8", "0-15", "0-9", "0-5", "0-7"],
   answer: 4, // 0-7
 },
-
 {
   text: "What is the definition of the algorithm?",
   options: [
@@ -700,7 +576,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Step-By-Step Solution sequence
 },
-
 {
   text: "Times New Roman, Comic Sans and Calibri are called__",
   options: [
@@ -712,7 +587,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Fonts
 },
-
 {
   text: "How to identify the beginning of a new paragraph (HTML)",
   options: [
@@ -729,7 +603,6 @@ window.TEST_BANK.ict = {
   options: ["SUT", "SUB", "BODY", "SUP", "SU"],
   answer: 3, // SUP
 },
-
 {
   text: "What is PowerPoint?",
   options: [
@@ -741,7 +614,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // Itis a computer program that allows you to create and show slides to support a presentation.
 },
-
 {
   text: "How to insert a hyperlink to a document of this type to Task1.html (HTML)",
   options: [
@@ -753,25 +625,21 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // <AHREF="Task1.html"> TEXT </A>
 },
-
 {
   text: "Line spacing is in the ____ of MS Word",
   options: ["Formattab", "Viewtab", "Hometab", "Inserttab", "Pagesetup"],
   answer: 2, // Hometab
 },
-
 {
   text: "what number is obtained when converting 11001 in binary to decimal?",
   options: ["18", "19", "21", "15", "17"],
   answer: 4, // 17
 },
-
 {
   text: "… is a computer file created using a special hypertext markup language HTML.",
   options: ["Excelfile", "Pdf flie", "Textfile", "Webpage", "Picture"],
   answer: 3, // Webpage
 },
-
 {
   text: "Create text-based documents, reports, letters, and memos",
   options: [
@@ -783,7 +651,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // GoogleDocs, MS Word
 },
-
 {
   text: "What is HTML used for?",
   options: [
@@ -795,7 +662,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // to create webpages
 },
-
 {
   text: "What is the function of a modem?",
   options: [
@@ -807,7 +673,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // To connect tothe internet
 },
-
 {
   text: "What does the term \"big data\" refer to?",
   options: [
@@ -819,7 +684,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // A collection oflarge and complex datasets
 },
-
 {
   text: "What is the operating system?",
   options: [
@@ -831,25 +695,21 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // computer hardware device managementprogram
 },
-
 {
   text: "what characters are used in the hexadecimal number system?",
   options: ["0-7", "1-16", "0-9 anda-F", "0-9", "0-15"],
   answer: 2, // 0-9 anda-F
 },
-
 {
   text: "How many bits is a byte?",
   options: ["16", "8", "32", "42", "2"],
   answer: 1, // 8
 },
-
 {
   text: "Short cut key for Paste is",
   options: ["Ctrl+b", "Ctrl+f", "Ctrl+v", "Ctrl+c", "Ctrl+z"],
   answer: 2, // Ctrl+v
 },
-
 {
   text: "EDS stands for …",
   options: [
@@ -861,7 +721,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // ElectronicDigital Signature
 },
-
 {
   text: "What is the electronic spreadsheet used for?",
   options: [
@@ -873,7 +732,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // to work with numerical data
 },
-
 {
   text: "What is Computer hardware?",
   options: [
@@ -885,19 +743,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Itis the application of computers to store, study, retrieve, transmit, and manipulate data
 },
-
 {
   text: "Choose the right cell address",
   options: ["BZ_99", "\"A10000", "BB1", "B1", "#A10"],
   answer: 3, // B1
 },
-
 {
   text: "How much space Google gives users as free?",
   options: ["10Gb", "20Gb", "5Gb", "15Gb", "limitless"],
   answer: 3, // 15Gb
 },
-
 {
   text: "What is AVERAGE() function",
   options: [
@@ -920,19 +775,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // distribution and reception ofinformation for internet access
 },
-
 {
   text: "Tag for subscript words in HTML.",
   options: ["SUB", "SUP", "SU", "SUT", "BODY"],
   answer: 0, // SUB
 },
-
 {
   text: "what is the value of 1011 in the binary number system in the decimal system?",
   options: ["13", "9", "6", "5", "11"],
   answer: 0, // 13
 },
-
 {
   text: "How to identify the Headers of paragraph (HTML)",
   options: [
@@ -944,7 +796,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // <H1>… </ H1> and <H2> … </ H2>
 },
-
 {
   text: "If cells: A1=90; A2=85; A3=80; A4=75; A5=75. What will be your formula if you are going to get the total? Choose INCORRECT answer!",
   options: [
@@ -956,7 +807,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // =SIN(A1:A5)
 },
-
 {
   text: "The binary equivalent of the Hexadecimal number 7BD is",
   options: [
@@ -968,13 +818,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // 11110111101
 },
-
 {
   text: "What kind of address $C1 is",
   options: ["books", "mixed", "absolute", "address", "relative"],
   answer: 1, // mixed
 },
-
 {
   text: "What types of Algorithms Are there?",
   options: [
@@ -986,7 +834,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // linear, branched and repetitive
 },
-
 {
   text: "Conversion of an octal number 73 to binary number is",
   options: [
@@ -998,19 +845,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // 111011
 },
-
 {
   text: "Which of the following is NOT a type of computer memory?",
   options: ["SSD", "USB", "ROM", "NTML", "RAM"],
   answer: 0, // SSD
 },
-
 {
   text: "Arial, Cambria, Verdana, Times New Roman are the name of ____",
   options: ["Fontface", "Text", "Pagesetup", "Highlights", "Alignment"],
   answer: 0, // Fontface
 },
-
 {
   text: "how to convert numbers to binary?",
   options: [
@@ -1022,13 +866,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // by dividing the decimal number by 2
 },
-
 {
   text: "Short cut key for Bold is",
   options: ["Ctrl+b", "Ctrl+x", "Ctrl+v", "Ctrl+c3", "Ctrl+z"],
   answer: 0, // Ctrl+b
 },
-
 {
   text: "The binary equivalent of the Hexadecimal number 74A is",
   options: [
@@ -1040,7 +882,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // 11101001010
 },
-
 {
   text: "How to identify the numbered and unnumbered lists (HTML)",
   options: [
@@ -1052,7 +893,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // <OL>…</OL> and <UL>…</UL>
 },
-
 {
   text: "What is MAX() function",
   options: [
@@ -1064,7 +904,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Returnsthe biggest number in a set of values
 },
-
 {
   text: "What is a computer network?",
   options: [
@@ -1076,19 +915,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // communication system between computers
 },
-
 {
   text: "The computer translates the condition of each switch to a number. What number is represented by the OFF state?",
   options: ["01", "2", "1", "0", "-3.75"],
   answer: 3, // 0
 },
-
 {
   text: "What software is needed to create slideshows?",
   options: ["Slideshows", "WindowsXP", "MS Powerpoint", "MSWord", "Paint"],
   answer: 2, // MS Powerpoint
 },
-
 {
   text: "which programs are most often used to process video content from a digital camera?",
   options: [
@@ -1100,7 +936,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Adobe Premiere, Final Cut Pro
 },
-
 {
   text: "What is the purpose of the \"cloud\" in cloud computing?",
   options: [
@@ -1112,7 +947,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // To store andprocess data over the internet
 },
-
 {
   text: "the main function of the keyboard?",
   options: [
@@ -1124,7 +958,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // entering data into the computer
 },
-
 {
   text: "What \"Master function\" button used for in the Excel?",
   options: [
@@ -1136,7 +969,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Insertfunctions, which quickly and easily predefined formulas
 },
-
 {
   text: "Conversion of a hexadecimal number D8 to binary number is",
   options: [
@@ -1148,19 +980,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // 11011000
 },
-
 {
   text: "Which one of these is an operating system?",
   options: ["Photoshop", "Google Chrome", "Microsoft Word", "USB", "Linux"],
   answer: 4, // Linux
 },
-
 {
   text: "When did World Wide Web introduce?",
   options: ["1837", "2014", "1850", "1990", "1860"],
   answer: 3, // 1990
 },
-
 {
   text: "Google Docs allows you to insert or upload images from which source(s)?",
   options: [
@@ -1172,13 +1001,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Allof them
 },
-
 {
   text: "The decimal equivalent of the binary number 1010100 is",
   options: ["84", "64", "46", "98", "39"],
   answer: 0, // 84
 },
-
 {
   text: "Conversion of an octal number 106 to binary number is",
   options: [
@@ -1190,7 +1017,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // 1000110
 },
-
 {
   text: "What is the meaning of \"$\" in the program Excel",
   options: [
@@ -1202,7 +1028,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // Inthe process of copying, not to change the cell address
 },
-
 {
   text: "Can a cell be transferred from horizontal position to vertical in the Excel?",
   options: [
@@ -1214,7 +1039,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Yes,go to the field orientation and change position to 90° in Alignment tab
 },
-
 {
   text: "What is MIN() function",
   options: [
@@ -1226,49 +1050,31 @@ window.TEST_BANK.ict = {
   ],
   answer: 4, // Returnsthe smallest number in a set of values
 },
-
-{
-  text: "Times New Roman, Comic Sans and Calibri are called__",
-  options: [
-    "Fontsizes",
-    "Alligment",
-    "Thermodynamics",
-    "Fonts",
-    "Variations",
-  ],
-  answer: 3, // Fonts
-},
-
 {
   text: "Google Docs is most similar to which application?",
   options: ["MSExcel", "MSPower Point", "MSAccess", "MSWord", "GoogleDrive"],
   answer: 3, // MSWord
 },
-
 {
   text: "... - application layer protocol of data transmission.",
   options: ["domain", ".com", "http", "wwws", "www"],
   answer: 2, // http
 },
-
 {
   text: "The decimal equivalent of the binary number 101011 is",
   options: ["41", "46", "44", "43", "39"],
   answer: 3, // 43
 },
-
 {
   text: "The octal equivalent of the number 10011.1101 is",
   options: ["23.64", "Noneof these", "63.51", "32.54", "23.53"],
   answer: 0, // 23.64
 },
-
 {
   text: "The valid format of MS Excel is ___",
   options: [".png", ".gif", ".jpeg", ".xls", ".doc"],
   answer: 3, // .xls
 },
-
 {
   text: "What is a domain name?",
   options: [
@@ -1280,7 +1086,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // The uniqueaddress of a website on the internet
 },
-
 {
   text: "Presentation Graphics may contain",
   options: [".jpeg", ".mpeg", "Text", "Graphics", "Allof this"],
@@ -1291,25 +1096,21 @@ window.TEST_BANK.ict = {
   options: ["16", "32", "52", "22", "20"],
   answer: 3, // 22
 },
-
 {
   text: "what number is obtained when converting the number 23 in the Octal system to the binary system?",
   options: ["11101", "100001", "10011", "11001", "10001"],
   answer: 3, // 11001
 },
-
 {
   text: "what is the value of the number B in the hexadecimal system in the binary system?",
   options: ["1001", "1011", "1010", "1101", "1110"],
   answer: 1, // 1011
 },
-
 {
   text: "Tag to insert background's picture in HTML.",
   options: ["HEIGHT", "ALIGN", "BODYBACKGROUND", "BODY", "HREF"],
   answer: 2, // BODYBACKGROUND
 },
-
 {
   text: "What is a blog?",
   options: [
@@ -1321,7 +1122,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // A personaljournal or article published on the internet
 },
-
 {
   text: "What is the purpose of a backup in data management?",
   options: [
@@ -1333,13 +1133,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // To create copies of data in case of loss
 },
-
 {
   text: "Choose tags to create a table in HTML?",
   options: ["HEAD", "BEGIN", "ALIGN", "TABLE,TR, TD", "END"],
   answer: 3, // TABLE,TR, TD
 },
-
 {
   text: "What is virtual memory?",
   options: [
@@ -1351,7 +1149,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // secondary memory usedby the operating system
 },
-
 {
   text: "What is cloud computing?",
   options: [
@@ -1363,7 +1160,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // Using theinternet for data storage and processing
 },
-
 {
   text: "What is the function of a database management system (DBMS)?",
   options: [
@@ -1375,13 +1171,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 3, // To organize,store, and retrieve data
 },
-
 {
   text: "Arial, Cambria, Verdana, Times New Roman are the name of ____",
   options: ["Pagesetup", "Text", "Alignment", "Highlights", "Fontface"],
   answer: 4, // Fontface
 },
-
 {
   text: "What is a VPN (Virtual Private Network)?",
   options: [
@@ -1393,19 +1187,16 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // A tool foranonymous internet browsing
 },
-
 {
   text: "The decimal equivalent of the binary number 100101 is",
   options: ["73", "33", "46", "28", "37"],
   answer: 4, // 37
 },
-
 {
   text: "Tag for background's color of the document in HTML?",
   options: ["TITLE", "BODYBGCOLOR", "SU", "END", "HEAD"],
   answer: 1, // BODYBGCOLOR
 },
-
 {
   text: "What is Microsoft Excel used for?",
   options: [
@@ -1417,7 +1208,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 2, // for data processing andanalysis
 },
-
 {
   text: "for what purpose is Excel used?",
   options: [
@@ -1429,7 +1219,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // data processing
 },
-
 {
   text: "The transistorized computer circuits were introduced in the",
   options: [
@@ -1441,13 +1230,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Secondgeneration
 },
-
 {
   text: "what number comes up when you convert 100110 in binary to octal?",
   options: ["64", "31", "56", "55", "45"],
   answer: 2, // 56
 },
-
 {
   text: "Which of the following is not currently a topic in computer science?",
   options: [
@@ -1459,25 +1246,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // Thermodynamics
 },
-
 {
   text: "How many generations of computers you now?",
   options: ["2", "4", "5", "1", "3"],
   answer: 2, // 5
 },
-
-{
-  text: "when is the listing structure used?",
-  options: [
-    "in syntax management in programming languages",
-    "in the protection ofinformation",
-    "in data storage",
-    "in speeding up the operation of the computer",
-    "in Data Processing in algorithms",
-  ],
-  answer: 4, // in Data Processing in algorithms
-},
-
 {
   text: "The third generation of computers covers the period:",
   options: [
@@ -1489,7 +1262,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // 1965-1970
 },
-
 {
   text: "Integrated circuit (ICs) as basic electronic component (SSIC and MSIC)",
   options: [
@@ -1501,13 +1273,11 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // ThirdGeneration of Computers
 },
-
 {
   text: "Short cut key for Undo is",
   options: ["Ctrl+x", "Ctrl+f", "Ctrl+z", "Ctrl+b", "Ctrl+c"],
   answer: 2, // Ctrl+z
 },
-
 {
   text: "What does a computer virus do?",
   options: [
@@ -1563,17 +1333,7 @@ window.TEST_BANK.ict = {
   ],
   answer: 2
 },
-{
-  text: "how many characters are used in the decimal system?",
-  options: [
-    "10",
-    "5",
-    "8",
-    "12",
-    "2"
-  ],
-  answer: 0
-},
+
   {
   text: "A monitor displays information...",
   options: [
@@ -1617,6 +1377,559 @@ window.TEST_BANK.ict = {
     "1999"
   ],
   answer: 3 // 1974
-},  //тут должны быть вопросы, варианты и ответы
+},
+{
+  text: "what data types are used in Excel?",
+  options: [
+    "date and time",
+    "Texts",
+    "Total",
+    "Numbers",
+    "Formulas"
+  ],
+  answer: 2
+},
+{
+  text: "in what form is the address of a cell written in Excel?",
+  options: [
+    "A5",
+    "5A",
+    "5B",
+    "5-5",
+    "65"
+  ],
+  answer: 0
+},
+{
+  text: "What is Computer software?",
+  options: [
+    "physical parts of a computer",
+    "programs and applications used by a computer",
+    "computer network device",
+    "internet connection",
+    "data storage cabinet"
+  ],
+  answer: 1
+},
+
+{
+  text: "Kilobyte (KB) =",
+  options: [
+    "1024 bytes",
+    "1000 bytes",
+    "1024 megabytes",
+    "8 bits",
+    "2048 bytes"
+  ],
+  answer: 0
+},
+
+{
+  text: "Short cut key for Cut is",
+  options: [
+    "Ctrl+v",
+    "Ctrl+x",
+    "Ctrl+c",
+    "Ctrl+z",
+    "Ctrl+b"
+  ],
+  answer: 1
+},
+
+{
+  text: "To make a cell ABSOLUTE address, we should..",
+  options: [
+    "use symbol $",
+    "use symbol %",
+    "use symbol #",
+    "use symbol &",
+    "use symbol @"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is the meaning of \"C$5\" in the program Excel",
+  options: [
+    "mixed address",
+    "absolute address",
+    "relative address",
+    "currency format",
+    "formula error"
+  ],
+  answer: 0
+},
+
+{
+  text: "Before we start writing any formula to a cell, we select it and press the symbol....",
+  options: [
+    "=",
+    "+",
+    "#",
+    "&",
+    "$"
+  ],
+  answer: 0
+},
+
+{
+  text: "Choose wrong expression in the Excel",
+  options: [
+    "=SUM(A1:A5)",
+    "=A1+A2",
+    "=IF(A1>5,1,0)",
+    "SUM(A1:A5)",
+    "=AVERAGE(A1:A5)"
+  ],
+  answer: 3
+},
+
+{
+  text: "Choose right expression in the Excel",
+  options: [
+    "SUM(A1:A5)",
+    "AVERAGE(A1:A5)",
+    "=SUM(A1:A5)",
+    "A1+A2",
+    "COUNT(A1:A5)"
+  ],
+  answer: 2
+},
+
+{
+  text: "In order to multiply items in Excel you would use:",
+  options: [
+    "*",
+    "+",
+    "-",
+    "/",
+    "%"
+  ],
+  answer: 0
+},
+
+{
+  text: "HTML stands for …",
+  options: [
+    "HyperText Markup Language",
+    "HighText Machine Language",
+    "Hyper Transfer Markup Language",
+    "Home Tool Markup Language",
+    "Hyperlink Text Management Language"
+  ],
+  answer: 0
+},
+
+{
+  text: "How to identify the italic and bold text (HTML)",
+  options: [
+    "<I>...</I> and <B>...</B>",
+    "<H1>...</H1>",
+    "<OL>...</OL>",
+    "<BR><BR>",
+    "<TABLE></TABLE>"
+  ],
+  answer: 0
+},
+
+{
+  text: "In the HTML every code called as …",
+  options: [
+    "tag",
+    "browser",
+    "attribute",
+    "server",
+    "database"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is identifying a resource, provides information on the location of this resource?",
+  options: [
+    "URL",
+    "CPU",
+    "HTML",
+    "RAM",
+    "DNS"
+  ],
+  answer: 0
+},
+
+{
+  text: "PowerPoint can be used to:",
+  options: [
+    "create presentations",
+    "edit videos",
+    "create operating systems",
+    "develop antivirus software",
+    "repair hardware"
+  ],
+  answer: 0
+},
+
+{
+  text: "HTML file’s type?",
+  options: [
+    ".html",
+    ".docx",
+    ".xlsx",
+    ".ppt",
+    ".mp3"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tag of unnumbered list in HTML.",
+  options: [
+    "UL",
+    "OL",
+    "LI",
+    "TR",
+    "TD"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tag for the first level, size of words in HTML.",
+  options: [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tag for the second level, size of words in HTML.",
+  options: [
+    "H2",
+    "H1",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tag for italic words in HTML.",
+  options: [
+    "I",
+    "B",
+    "U",
+    "SUP",
+    "SUB"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tags to skip three lines in HTML.",
+  options: [
+    "<BR><BR><BR>",
+    "<BR><BR>",
+    "<P></P>",
+    "<HR>",
+    "<BRBRBR>"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tags to skip two lines in HTML.",
+  options: [
+    "<BR><BR>",
+    "<BR>",
+    "<P>",
+    "<HR>",
+    "<BRBR>"
+  ],
+  answer: 0
+},
+
+{
+  text: "Tag to insert a hyperlink in HTML.",
+  options: [
+    "<A HREF='link'>",
+    "<IMG>",
+    "<BODY>",
+    "<TABLE>",
+    "<BR>"
+  ],
+  answer: 0
+},
+
+{
+  text: "Function in excel filter, which shows text starts with letter “a”?",
+  options: [
+    "beginswith a",
+    "endswith a",
+    "equals a",
+    "greaterthan a",
+    "lessthan a"
+  ],
+  answer: 0
+},
+
+{
+  text: "The valid format of MS Word is ___",
+  options: [
+    ".doc",
+    ".xls",
+    ".ppt",
+    ".jpeg",
+    ".mp3"
+  ],
+  answer: 0
+},
+
+{
+  text: "Which file format cannot be added to a Word document using Special Paste?",
+  options: [
+    ".mp3",
+    ".doc",
+    ".xls",
+    ".ppt",
+    ".txt"
+  ],
+  answer: 0
+},
+
+{
+  text: "Which of the following is not an option in clipboard?",
+  options: [
+    "Compile",
+    "Copy",
+    "Paste",
+    "Cut",
+    "Format Painter"
+  ],
+  answer: 0
+},
+
+{
+  text: "Google Sheets is most similar to which application?",
+  options: [
+    "MS Excel",
+    "MS Word",
+    "MS Access",
+    "Paint",
+    "Google Docs"
+  ],
+  answer: 0
+},
+
+{
+  text: "Google Slides is most similar to which application?",
+  options: [
+    "MS PowerPoint",
+    "MS Excel",
+    "MS Word",
+    "MS Access",
+    "Paint"
+  ],
+  answer: 0
+},
+
+{
+  text: "To add text boxes or shapes to your document, you will need to ________.",
+  options: [
+    "use the Insert tab",
+    "open Control Panel",
+    "restart the computer",
+    "format the disk",
+    "open Task Manager"
+  ],
+  answer: 0
+},
+
+{
+  text: "The electronic transmission of signals for communications",
+  options: [
+    "telecommunications",
+    "programming",
+    "encryption",
+    "spreadsheeting",
+    "multimedia"
+  ],
+  answer: 0
+},
+
+{
+  text: "What does share hardware, programs, and databases across the organization?",
+  options: [
+    "computer network",
+    "spreadsheet",
+    "operating system",
+    "web browser",
+    "database file"
+  ],
+  answer: 0
+},
+
+{
+  text: "What Internet networking technologies are being used as technology platform",
+  options: [
+    "Internet",
+    "CPU",
+    "RAM",
+    "HTML",
+    "Bluetooth"
+  ],
+  answer: 0
+},
+
+{
+  text: "First ARPANET appeared in …",
+  options: [
+    "1969",
+    "1990",
+    "1950",
+    "2001",
+    "1980"
+  ],
+  answer: 0
+},
+
+{
+  text: "When was built the first computer and how is called?",
+  options: [
+    "1946, ENIAC",
+    "1971, Intel",
+    "1990, WWW",
+    "1837, Telegraph",
+    "2001, Google"
+  ],
+  answer: 0
+},
+
+{
+  text: "Which of the following are file extensions for text editor files?",
+  options: [
+    ".txt",
+    ".mp3",
+    ".jpeg",
+    ".avi",
+    ".png"
+  ],
+  answer: 0
+},
+
+{
+  text: "What does CPU stand for?",
+  options: [
+    "Central Processing Unit",
+    "Central Program Utility",
+    "Computer Processing Unit",
+    "Control Processing Utility",
+    "Central Printing Unit"
+  ],
+  answer: 0
+},
+
+{
+  text: "Which one of the following is an example of cloud storage?",
+  options: [
+    "Google Drive",
+    "RAM",
+    "CPU",
+    "Motherboard",
+    "Printer"
+  ],
+  answer: 0
+},
+
+{
+  text: "What does a firewall do?",
+  options: [
+    "protects a network from unauthorized access",
+    "creates websites",
+    "edits images",
+    "stores electricity",
+    "formats documents"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is malware?",
+  options: [
+    "malicious software",
+    "spreadsheet software",
+    "video editor",
+    "network cable",
+    "web browser"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is the role of a router in a network?",
+  options: [
+    "to direct network traffic",
+    "to print documents",
+    "to edit photos",
+    "to store files permanently",
+    "to create presentations"
+  ],
+  answer: 0
+},
+
+{
+  text: "What does IoT stand for?",
+  options: [
+    "Internet of Things",
+    "Input of Technology",
+    "Internet of Telecommunications",
+    "Integrated online Tools",
+    "International office Technology"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is encryption?",
+  options: [
+    "the process of encoding information",
+    "creating spreadsheets",
+    "editing images",
+    "installing hardware",
+    "formatting text"
+  ],
+  answer: 0
+},
+
+{
+  text: "Which of these is a type of online transaction?",
+  options: [
+    "online banking",
+    "video rendering",
+    "disk formatting",
+    "hardware cooling",
+    "word processing"
+  ],
+  answer: 0
+},
+
+{
+  text: "What is the purpose of a printer in computing?",
+  options: [
+    "to produce hard copies of documents",
+    "to browse websites",
+    "to manage databases",
+    "to create software",
+    "to connect to networks"
+  ],
+  answer: 0
+},
+
+
+ //тут должны быть вопросы, варианты и ответы
   ],
 };
+
