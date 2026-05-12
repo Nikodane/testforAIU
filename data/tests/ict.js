@@ -255,7 +255,7 @@ window.TEST_BANK.ict = {
 {
   text: "what is the value of the number 17 in the Octal system in the binary system?",
   options: ["10101", "111", "100001", "10011", "11001"],
-  answer: 4, // 11001
+  answer: 1, 
 },
 {
   text: "which are the main computer devices?",
@@ -362,7 +362,7 @@ window.TEST_BANK.ict = {
 {
   text: "We can remove / hide border of a shape by selecting …",
   options: ["NoLine", "NoBorder", "WhiteLine", "NoOutline", "GoogleDrive"],
-  answer: 1, // NoBorder
+  answer: 3, // NoBorder
 },
 {
   text: "Tag for underline words in HTML.",
@@ -1010,7 +1010,7 @@ window.TEST_BANK.ict = {
   answer: 3, // 1000110
 },
 {
-  text: "What is the meaning of \"$\" in the program Excel",
+  text: "What is the meaning of \"C$5\" in the program Excel",
   options: [
     "returnscurrency meaning",
     "Itis impossible to change the meaning of cell",
@@ -1510,21 +1510,8 @@ window.TEST_BANK.ict = {
   ],
   answer: 0
 },
-    // Дополнительные уникальные вопросы из Word-файла
-
 {
-  text: "What is the meaning of \" $ \" in the program Excel",
-  options: [
-    "Absolute cell reference",
-    "Relative cell reference",
-    "Mixed cell reference",
-    "Currency symbol only",
-    "None of these"
-  ],
-  answer: 0, // Absolute cell reference 
-},
-{
-  text: "What is the meaning of \"C$5\" in the program Excel",
+  text: "What kind of address C$1 is",
   options: [
     "Relative address",
     "Absolute address",
@@ -1532,7 +1519,7 @@ window.TEST_BANK.ict = {
     "Column is absolute",
     "Row is absolute"
   ],
-  answer: 4, // Row is absolute 
+  answer: 0, // Row is absolute 
 },
 {
   text: "In order to multiply items in Excel you would use:",
@@ -1605,8 +1592,23 @@ window.TEST_BANK.ict = {
     "Translating web pages"
   ],
   answer: 1, // Converting data into a code to prevent unauthorized access
-}
- //тут должны быть вопросы, варианты и ответы
+},
+{
+  text: "Which file format cannot be added to a Word document using Special Paste?",
+  options: [".docx", ".txt", ".gif", ".rtf", ".html"],
+  answer: 2 // .gif
+},
+ {
+  text: "What does URL stand for?",
+  options: [
+    "Uniform Resource Locator",
+    "Universal Reference Link",
+    "Uniform Record Link",
+    "Universal Resource Language",
+    "Unified Resource Locator"
+  ],
+  answer: 0 // Uniform Resource Locator
+},
   ],
 };
 
