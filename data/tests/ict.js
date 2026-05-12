@@ -1596,7 +1596,7 @@ window.TEST_BANK.ict = {
 {
   text: "Which file format cannot be added to a Word document using Special Paste?",
   options: [".docx", ".txt", ".gif", ".rtf", ".html"],
-  answer: 2 // .gif
+  answer: 3 // .gif
 },
  {
   text: "What does URL stand for?",
