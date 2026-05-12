@@ -20,7 +20,7 @@ window.TEST_BANK.test_2_10_8_16 = {
 {
   text: "what is the value of the number 17 in the Octal system in the binary system?",
   options: ["10101", "111", "100001", "10011", "11001"],
-  answer: 1, // 11001
+  answer: 0, // 11001
 },
 {
   text: "convert 15 in decimal to binary:",
@@ -46,7 +46,7 @@ window.TEST_BANK.test_2_10_8_16 = {
 {
   text: "what number is obtained when converting 11001 in binary to decimal?",
   options: ["18", "19", "21", "15", "17"],
-  answer: 1, // 17
+  answer: 4, // 17
 },
 {
   text: "what is the value of 1011 in the binary number system in the decimal system?",
