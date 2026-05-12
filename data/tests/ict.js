@@ -1531,6 +1531,125 @@ window.TEST_BANK.ict = {
   ],
   answer: 0
 },
+    // Дополнительные уникальные вопросы из Word-файла
+{
+  text: "The computer translates the condition of each switch to a number. What number is represented by the OFF state?",
+  options: ["1", "0", "2", "11", "01"],
+  answer: 1, // 0 
+},
+{
+  text: "What is the meaning of \" $ \" in the program Excel",
+  options: [
+    "Absolute cell reference",
+    "Relative cell reference",
+    "Mixed cell reference",
+    "Currency symbol only",
+    "None of these"
+  ],
+  answer: 0, // Absolute cell reference 
+},
+{
+  text: "What is the meaning of \"C$5\" in the program Excel",
+  options: [
+    "Relative address",
+    "Absolute address",
+    "Mixed address",
+    "Column is absolute",
+    "Row is absolute"
+  ],
+  answer: 4, // Row is absolute 
+},
+{
+  text: "What is MIN() function",
+  options: [
+    "Finds the smallest value in a range",
+    "Finds the largest value",
+    "Calculates average",
+    "Sums the values",
+    "Counts the values"
+  ],
+  answer: 0, // Finds the smallest value in a range 
+},
+{
+  text: "What is MAX() function",
+  options: [
+    "Finds the smallest value",
+    "Finds the largest value in a range",
+    "Calculates average",
+    "Sums the values",
+    "Counts the values"
+  ],
+  answer: 1, // Finds the largest value in a range 
+},
+{
+  text: "What is AVERAGE() function",
+  options: [
+    "Finds the middle number",
+    "Sums all numbers",
+    "Calculates the arithmetic mean of a range",
+    "Finds the most frequent number",
+    "None of these"
+  ],
+  answer: 2, // Calculates the arithmetic mean of a range 
+},
+{
+  text: "What will we get in cell A3, if the cells are A1=500; A2=450, then select these two cells and use autofill?",
+  options: ["400", "550", "350", "450", "500"],
+  answer: 0, // 400 
+},
+{
+  text: "In order to multiply items in Excel you would use:",
+  options: ["^", "/", "-", "+", "*"],
+  answer: 4, // * 
+},
+{
+  text: "Convert hexadecimal value 16 to decimal",
+  options: ["16", "22", "32", "10", "24"],
+  answer: 1, // 22 
+},
+{
+  text: "How many bits is a byte?",
+  options: ["4", "16", "8", "32", "64"],
+  answer: 2, // 8 
+},
+{
+  text: "Short cut key for Undo is",
+  options: ["Ctrl+y", "Ctrl+u", "Ctrl+z", "Ctrl+x", "Ctrl+p"],
+  answer: 2, // Ctrl+z 
+},
+{
+  text: "The binary equivalent of the Hexadecimal number 74A is",
+  options: [
+    "011101001010",
+    "111101001010",
+    "011100001010",
+    "011101001111",
+    "011101011010"
+  ],
+  answer: 0, // 011101001010 
+},
+{
+  text: "The binary equivalent of the Hexadecimal number 7BD is",
+  options: [
+    "011110111101",
+    "111110111101",
+    "011110111100",
+    "011110101101",
+    "011111111101"
+  ],
+  answer: 0, // 011110111101 
+},
+{
+  text: "Which of the following is not currently a topic in computer science?",
+  options: [
+    "Artificial Intelligence",
+    "Thermodynamics",
+    "Data Science",
+    "Cybersecurity",
+    "Software Engineering"
+  ],
+  answer: 1, // Thermodynamics 
+}
  //тут должны быть вопросы, варианты и ответы
   ],
 };
