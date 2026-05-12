@@ -10,7 +10,7 @@ const tests = [
   {
     id: "test-2-10-8-16",
     title: "2 > 10 > 8 > 16",
-    description: "Новый тест. Вопросы можно заполнить в отдельном файле базы.",
+    description: "Новый тест.",
     cover:
       "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1400&q=80",
     dataKey: "test_2_10_8_16",
