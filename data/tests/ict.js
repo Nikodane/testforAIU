@@ -1650,6 +1650,71 @@ window.TEST_BANK.ict = {
   ],
   answer: 1, // Thermodynamics 
 }
+    // Вторая часть недостающих вопросов
+{
+  text: "To make a cell ABSOLUTE address, we should..",
+  options: [
+    "Type $ before column and row",
+    "Press F4",
+    "Type # before address",
+    "It is impossible",
+    "Use brackets"
+  ],
+  answer: 0, // Type $ before column and row
+},
+{
+  text: "What 'Master function' button used for in the Excel?",
+  options: [
+    "To create charts",
+    "To help search and insert functions",
+    "To delete data",
+    "To save file",
+    "To print document"
+  ],
+  answer: 1, // To help search and insert functions
+},
+{
+  text: "Short cut key for Paste is",
+  options: ["Ctrl+c", "Ctrl+p", "Ctrl+v", "Ctrl+x", "Ctrl+s"],
+  answer: 2, // Ctrl+v
+},
+{
+  text: "Before we start writing any formula to a cell, we select it and press the symbol....",
+  options: ["+", "-", "*", "=", "/"],
+  answer: 3, // =
+},
+{
+  text: "In the HTML every code called as …",
+  options: ["Code", "Tag", "Link", "Symbol", "Script"],
+  answer: 1, // Tag
+},
+{
+  text: "How many generations of computers you now?",
+  options: ["3", "4", "5", "6", "2"],
+  answer: 2, // 5
+},
+{
+  text: "What is the function of a database management system (DBMS)?",
+  options: [
+    "To create images",
+    "To play videos",
+    "To store and manage large amounts of structured data",
+    "To browse the web",
+    "To edit text"
+  ],
+  answer: 2, // To store and manage large amounts of structured data
+},
+{
+  text: "What is encryption?",
+  options: [
+    "Increasing data size",
+    "Converting data into a code to prevent unauthorized access",
+    "Deleting old files",
+    "Copying data to cloud",
+    "Translating web pages"
+  ],
+  answer: 1, // Converting data into a code to prevent unauthorized access
+}
  //тут должны быть вопросы, варианты и ответы
   ],
 };
