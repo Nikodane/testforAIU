@@ -1639,17 +1639,6 @@ window.TEST_BANK.ict = {
   ],
   answer: 0, // 011110111101 
 },
-{
-  text: "Which of the following is not currently a topic in computer science?",
-  options: [
-    "Artificial Intelligence",
-    "Thermodynamics",
-    "Data Science",
-    "Cybersecurity",
-    "Software Engineering"
-  ],
-  answer: 1, // Thermodynamics 
-}
     // Вторая часть недостающих вопросов
 {
   text: "To make a cell ABSOLUTE address, we should..",
