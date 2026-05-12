@@ -255,7 +255,7 @@ window.TEST_BANK.ict = {
 {
   text: "what is the value of the number 17 in the Octal system in the binary system?",
   options: ["10101", "111", "100001", "10011", "11001"],
-  answer: 1, 
+  answer: 0, 
 },
 {
   text: "which are the main computer devices?",
@@ -362,7 +362,7 @@ window.TEST_BANK.ict = {
 {
   text: "We can remove / hide border of a shape by selecting …",
   options: ["NoLine", "NoBorder", "WhiteLine", "NoOutline", "GoogleDrive"],
-  answer: 3, // NoBorder
+  answer: 1, // NoBorder
 },
 {
   text: "Tag for underline words in HTML.",
@@ -633,7 +633,7 @@ window.TEST_BANK.ict = {
 {
   text: "what number is obtained when converting 11001 in binary to decimal?",
   options: ["18", "19", "21", "15", "17"],
-  answer: 2, // 17
+  answer: 4, // 17
 },
 {
   text: "… is a computer file created using a special hypertext markup language HTML.",
