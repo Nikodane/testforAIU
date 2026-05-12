@@ -1401,534 +1401,136 @@ window.TEST_BANK.ict = {
   answer: 0
 },
 {
-  text: "What is Computer software?",
+  text: "A microphone is used an input device...",
   options: [
-    "physical parts of a computer",
-    "programs and applications used by a computer",
-    "computer network device",
-    "internet connection",
-    "data storage cabinet"
-  ],
-  answer: 1
-},
-
-{
-  text: "Kilobyte (KB) =",
-  options: [
-    "1024 bytes",
-    "1000 bytes",
-    "1024 megabytes",
-    "8 bits",
-    "2048 bytes"
+    "true",
+    "false",
+    "monitor",
+    "printer",
+    "speaker"
   ],
   answer: 0
 },
 
 {
-  text: "Short cut key for Cut is",
+  text: "The binary equivalent of the Octal number 13 is",
   options: [
-    "Ctrl+v",
-    "Ctrl+x",
-    "Ctrl+c",
-    "Ctrl+z",
-    "Ctrl+b"
-  ],
-  answer: 1
-},
-
-{
-  text: "To make a cell ABSOLUTE address, we should..",
-  options: [
-    "use symbol $",
-    "use symbol %",
-    "use symbol #",
-    "use symbol &",
-    "use symbol @"
+    "1011",
+    "1101",
+    "1111",
+    "1010",
+    "1100"
   ],
   answer: 0
 },
 
 {
-  text: "What is the meaning of \"C$5\" in the program Excel",
+  text: "… - standardized markup language for documents on the world wide web.",
   options: [
-    "mixed address",
-    "absolute address",
-    "relative address",
-    "currency format",
-    "formula error"
-  ],
-  answer: 0
-},
-
-{
-  text: "Before we start writing any formula to a cell, we select it and press the symbol....",
-  options: [
-    "=",
-    "+",
-    "#",
-    "&",
-    "$"
-  ],
-  answer: 0
-},
-
-{
-  text: "Choose wrong expression in the Excel",
-  options: [
-    "=SUM(A1:A5)",
-    "=A1+A2",
-    "=IF(A1>5,1,0)",
-    "SUM(A1:A5)",
-    "=AVERAGE(A1:A5)"
-  ],
-  answer: 3
-},
-
-{
-  text: "Choose right expression in the Excel",
-  options: [
-    "SUM(A1:A5)",
-    "AVERAGE(A1:A5)",
-    "=SUM(A1:A5)",
-    "A1+A2",
-    "COUNT(A1:A5)"
-  ],
-  answer: 2
-},
-
-{
-  text: "In order to multiply items in Excel you would use:",
-  options: [
-    "*",
-    "+",
-    "-",
-    "/",
-    "%"
-  ],
-  answer: 0
-},
-
-{
-  text: "HTML stands for …",
-  options: [
-    "HyperText Markup Language",
-    "HighText Machine Language",
-    "Hyper Transfer Markup Language",
-    "Home Tool Markup Language",
-    "Hyperlink Text Management Language"
-  ],
-  answer: 0
-},
-
-{
-  text: "How to identify the italic and bold text (HTML)",
-  options: [
-    "<I>...</I> and <B>...</B>",
-    "<H1>...</H1>",
-    "<OL>...</OL>",
-    "<BR><BR>",
-    "<TABLE></TABLE>"
-  ],
-  answer: 0
-},
-
-{
-  text: "In the HTML every code called as …",
-  options: [
-    "tag",
-    "browser",
-    "attribute",
-    "server",
-    "database"
-  ],
-  answer: 0
-},
-
-{
-  text: "What is identifying a resource, provides information on the location of this resource?",
-  options: [
-    "URL",
-    "CPU",
     "HTML",
-    "RAM",
-    "DNS"
+    "HTTP",
+    "CSS",
+    "WWW",
+    "URL"
   ],
   answer: 0
 },
 
 {
-  text: "PowerPoint can be used to:",
+  text: "… is the integrated mechanism of interaction between the state and citizens, state agencies with each other, ensuring consistency with the help of informational technologies.",
   options: [
-    "create presentations",
-    "edit videos",
-    "create operating systems",
-    "develop antivirus software",
-    "repair hardware"
+    "E-Government",
+    "HTML",
+    "Wi-Fi",
+    "Bluetooth",
+    "Excel"
   ],
   answer: 0
 },
 
 {
-  text: "HTML file’s type?",
+  text: "… - is a program to create video.",
   options: [
-    ".html",
-    ".docx",
-    ".xlsx",
-    ".ppt",
-    ".mp3"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tag of unnumbered list in HTML.",
-  options: [
-    "UL",
-    "OL",
-    "LI",
-    "TR",
-    "TD"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tag for the first level, size of words in HTML.",
-  options: [
-    "H1",
-    "H2",
-    "H3",
-    "H4",
-    "H5"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tag for the second level, size of words in HTML.",
-  options: [
-    "H2",
-    "H1",
-    "H3",
-    "H4",
-    "H5"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tag for italic words in HTML.",
-  options: [
-    "I",
-    "B",
-    "U",
-    "SUP",
-    "SUB"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tags to skip three lines in HTML.",
-  options: [
-    "<BR><BR><BR>",
-    "<BR><BR>",
-    "<P></P>",
-    "<HR>",
-    "<BRBRBR>"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tags to skip two lines in HTML.",
-  options: [
-    "<BR><BR>",
-    "<BR>",
-    "<P>",
-    "<HR>",
-    "<BRBR>"
-  ],
-  answer: 0
-},
-
-{
-  text: "Tag to insert a hyperlink in HTML.",
-  options: [
-    "<A HREF='link'>",
-    "<IMG>",
-    "<BODY>",
-    "<TABLE>",
-    "<BR>"
-  ],
-  answer: 0
-},
-
-{
-  text: "Function in excel filter, which shows text starts with letter “a”?",
-  options: [
-    "beginswith a",
-    "endswith a",
-    "equals a",
-    "greaterthan a",
-    "lessthan a"
-  ],
-  answer: 0
-},
-
-{
-  text: "The valid format of MS Word is ___",
-  options: [
-    ".doc",
-    ".xls",
-    ".ppt",
-    ".jpeg",
-    ".mp3"
-  ],
-  answer: 0
-},
-
-{
-  text: "Which file format cannot be added to a Word document using Special Paste?",
-  options: [
-    ".mp3",
-    ".doc",
-    ".xls",
-    ".ppt",
-    ".txt"
-  ],
-  answer: 0
-},
-
-{
-  text: "Which of the following is not an option in clipboard?",
-  options: [
-    "Compile",
-    "Copy",
-    "Paste",
-    "Cut",
-    "Format Painter"
-  ],
-  answer: 0
-},
-
-{
-  text: "Google Sheets is most similar to which application?",
-  options: [
-    "MS Excel",
+    "Adobe Premiere",
     "MS Word",
-    "MS Access",
-    "Paint",
-    "Google Docs"
-  ],
-  answer: 0
-},
-
-{
-  text: "Google Slides is most similar to which application?",
-  options: [
-    "MS PowerPoint",
-    "MS Excel",
-    "MS Word",
-    "MS Access",
+    "Excel",
+    "Notepad",
     "Paint"
   ],
   answer: 0
 },
 
 {
-  text: "To add text boxes or shapes to your document, you will need to ________.",
+  text: "What is the primary function of a web browser?",
   options: [
-    "use the Insert tab",
-    "open Control Panel",
-    "restart the computer",
-    "format the disk",
-    "open Task Manager"
+    "access and display websites",
+    "edit videos",
+    "create databases",
+    "repair hardware",
+    "write code"
   ],
   answer: 0
 },
 
 {
-  text: "The electronic transmission of signals for communications",
+  text: "Which of the following is NOT a function of a network?",
   options: [
-    "telecommunications",
-    "programming",
-    "encryption",
-    "spreadsheeting",
-    "multimedia"
+    "Cooking food",
+    "sharing files",
+    "sharing hardware",
+    "communication",
+    "resource sharing"
   ],
   answer: 0
 },
 
 {
-  text: "What does share hardware, programs, and databases across the organization?",
+  text: "What does the term “bandwidth” refer to in networking?",
   options: [
-    "computer network",
-    "spreadsheet",
-    "operating system",
-    "web browser",
-    "database file"
+    "data transfer capacity",
+    "screen size",
+    "CPU speed",
+    "memory type",
+    "keyboard layout"
   ],
   answer: 0
 },
 
 {
-  text: "What Internet networking technologies are being used as technology platform",
+  text: "What is a spreadsheet used for?",
   options: [
-    "Internet",
-    "CPU",
-    "RAM",
-    "HTML",
-    "Bluetooth"
+    "organizing and calculating data",
+    "editing movies",
+    "creating websites",
+    "drawing pictures",
+    "playing games"
   ],
   answer: 0
 },
 
 {
-  text: "First ARPANET appeared in …",
+  text: "What is the function of a computer's motherboard?",
   options: [
-    "1969",
-    "1990",
-    "1950",
-    "2001",
-    "1980"
+    "connects all computer components",
+    "stores videos",
+    "creates documents",
+    "plays games",
+    "protects internet"
   ],
   answer: 0
 },
 
 {
-  text: "When was built the first computer and how is called?",
+  text: "What is the difference between a static and a dynamic website?",
   options: [
-    "1946, ENIAC",
-    "1971, Intel",
-    "1990, WWW",
-    "1837, Telegraph",
-    "2001, Google"
+    "dynamic websites change content automatically",
+    "static websites use internet",
+    "dynamic websites cannot use databases",
+    "static websites are always online",
+    "dynamic websites are text only"
   ],
   answer: 0
 },
-
-{
-  text: "Which of the following are file extensions for text editor files?",
-  options: [
-    ".txt",
-    ".mp3",
-    ".jpeg",
-    ".avi",
-    ".png"
-  ],
-  answer: 0
-},
-
-{
-  text: "What does CPU stand for?",
-  options: [
-    "Central Processing Unit",
-    "Central Program Utility",
-    "Computer Processing Unit",
-    "Control Processing Utility",
-    "Central Printing Unit"
-  ],
-  answer: 0
-},
-
-{
-  text: "Which one of the following is an example of cloud storage?",
-  options: [
-    "Google Drive",
-    "RAM",
-    "CPU",
-    "Motherboard",
-    "Printer"
-  ],
-  answer: 0
-},
-
-{
-  text: "What does a firewall do?",
-  options: [
-    "protects a network from unauthorized access",
-    "creates websites",
-    "edits images",
-    "stores electricity",
-    "formats documents"
-  ],
-  answer: 0
-},
-
-{
-  text: "What is malware?",
-  options: [
-    "malicious software",
-    "spreadsheet software",
-    "video editor",
-    "network cable",
-    "web browser"
-  ],
-  answer: 0
-},
-
-{
-  text: "What is the role of a router in a network?",
-  options: [
-    "to direct network traffic",
-    "to print documents",
-    "to edit photos",
-    "to store files permanently",
-    "to create presentations"
-  ],
-  answer: 0
-},
-
-{
-  text: "What does IoT stand for?",
-  options: [
-    "Internet of Things",
-    "Input of Technology",
-    "Internet of Telecommunications",
-    "Integrated online Tools",
-    "International office Technology"
-  ],
-  answer: 0
-},
-
-{
-  text: "What is encryption?",
-  options: [
-    "the process of encoding information",
-    "creating spreadsheets",
-    "editing images",
-    "installing hardware",
-    "formatting text"
-  ],
-  answer: 0
-},
-
-{
-  text: "Which of these is a type of online transaction?",
-  options: [
-    "online banking",
-    "video rendering",
-    "disk formatting",
-    "hardware cooling",
-    "word processing"
-  ],
-  answer: 0
-},
-
-{
-  text: "What is the purpose of a printer in computing?",
-  options: [
-    "to produce hard copies of documents",
-    "to browse websites",
-    "to manage databases",
-    "to create software",
-    "to connect to networks"
-  ],
-  answer: 0
-},
-
-
  //тут должны быть вопросы, варианты и ответы
   ],
 };
