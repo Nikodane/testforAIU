@@ -633,7 +633,7 @@ window.TEST_BANK.ict = {
 {
   text: "what number is obtained when converting 11001 in binary to decimal?",
   options: ["18", "19", "21", "15", "17"],
-  answer: 4, // 17
+  answer: 2, // 17
 },
 {
   text: "… is a computer file created using a special hypertext markup language HTML.",
